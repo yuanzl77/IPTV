@@ -3,8 +3,9 @@ name: Daily Update
 on:
   schedule:
     - cron: '0 20 * * *'
-  branches:
-    - main
+  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   run_script:
