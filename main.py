@@ -29,7 +29,9 @@ def getChannelItems():
                     # This is a url, add it to the list of urls for the current channel.
                     match = re.search(pattern, line)
                     if match:
-                        if match.group(1) not in channels[current_channel]:
+                        if current_channel not in channels:
+                            channels[current_channel] = {match.group(1): [match.group(2)]}
+                        elif match.group(1) not in channels[current_channel]:
                             channels[current_channel][match.group(1)] = [match.group(2)]
                         else:
                             channels[current_channel][match.group(1)].append(match.group(2))
