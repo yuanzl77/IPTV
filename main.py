@@ -57,4 +57,3 @@ if __name__ == "__main__":
     channels = getChannelItems()
     # Call the function to update channel URLs in M3U format
     updateChannelUrlsM3U(channels)
-    
