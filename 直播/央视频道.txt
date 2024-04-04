@@ -19,6 +19,7 @@ CCTV15,http://fmtv.wifi942.com:9999/api/proxy/ysp.php?id=CCTV15
 CCTV16,http://fmtv.wifi942.com:9999/api/proxy/ysp.php?id=CCTV16
 CCTV17,http://fmtv.wifi942.com:9999/api/proxy/ysp.php?id=CCTV17
 
+央视频道,#genre#
 CCTV1,https://www.sxtv.top/cctv.php?id=cctv1
 CCTV2,https://www.sxtv.top/cctv.php?id=cctv2
 CCTV3,https://www.sxtv.top/cctv.php?id=cctv3
@@ -38,6 +39,7 @@ CCTV15,https://www.sxtv.top/cctv.php?id=cctv15
 CCTV16,https://www.sxtv.top/cctv.php?id=cctv16
 CCTV17,https://www.sxtv.top/cctv.php?id=cctv17
 
+央视频道,#genre#
 CCTV1,http://dp.sxtv.top:88/live/bestv.php?id=cctv1
 CCTV2,http://dp.sxtv.top:88/live/bestv.php?id=cctv2
 CCTV3,http://dp.sxtv.top:88/live/bestv.php?id=cctv3
