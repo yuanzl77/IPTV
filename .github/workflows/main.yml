@@ -3,7 +3,9 @@ name: Daily Update
 on:
   schedule:
     - cron: '0 20 * * *'
-
+  push:
+    branches:
+      - main
 jobs:
   run_script:
     runs-on: ubuntu-latest
