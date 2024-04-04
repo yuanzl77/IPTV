@@ -42,7 +42,7 @@ def updateChannelUrlsM3U(channels):
     """
     Update the category and channel urls to the final file in M3U format
     """
-    with open("live.m3u", "a") as f:
+    with open("live.m3u", "w") as f:
         f.write("#EXTM3U\n")
         for channel, info in channels.items():
             for key, urls in info.items():
