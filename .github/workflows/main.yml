@@ -1,0 +1,27 @@
+name: Daily Update
+
+on:
+  schedule:
+    - cron: '0 20 * * *'
+
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt  # 如果有依赖需求，您可以在这里安装
+
+    - name: Run Python script
+      run: python main.py
+      
+    env:
+      TZ: Asia/Shanghai
