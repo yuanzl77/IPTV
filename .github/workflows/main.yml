@@ -27,13 +27,6 @@ jobs:
     - name: Run Python script
       run: python main.py
 
-    - name: Clear existing contents of live.m3u
-      run: echo '' > live.m3u
-
-    - name: Write new contents to live.m3u
-      run: |
-        python write_to_live_m3u.py >> live.m3u
-
     - name: Commit and push if changed
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
