@@ -1,6 +1,6 @@
 import re
 import requests
-from config import Config
+from config import config
 
 def getChannelItems():
     """
