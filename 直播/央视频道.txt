@@ -38,7 +38,6 @@ CCTV14,https://www.sxtv.top/cctv.php?id=cctv14
 CCTV15,https://www.sxtv.top/cctv.php?id=cctv15
 CCTV16,https://www.sxtv.top/cctv.php?id=cctv16
 CCTV17,https://www.sxtv.top/cctv.php?id=cctv17
-
 央视频道,#genre#
 CCTV1,http://dp.sxtv.top:88/live/bestv.php?id=cctv1
 CCTV2,http://dp.sxtv.top:88/live/bestv.php?id=cctv2
