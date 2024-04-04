@@ -9,35 +9,32 @@ def getChannelItems():
     channels = {}
 
     for url in Config.source_urls:
-        try:
-            # Get the content from each source URL
-            response = requests.get(url)
+        # Get the content from each source URL
+        response = requests.get(url)
 
-            # Check if the request was successful
-            if response.status_code == 200:
-                # Extract channel items from the response text
-                lines = response.text.split("\n")
-                current_channel = ""
-                pattern = r"^(.*?),(?!#genre#)(.*?)$"
+        # Check if the request was successful
+        if response.status_code == 200:
+            # Extract channel items from the response text
+            lines = response.text.split("\n")
+            current_channel = ""
+            pattern = r"^(.*?),(?!#genre#)(.*?)$"
 
-                for line in lines:
-                    line = line.strip()
-                    if "#genre#" in line:
-                        # This is a new channel, create a new key in the dictionary.
-                        current_channel = line.split(",")[0]
-                        channels[current_channel] = {}
-                    else:
-                        # This is a url, add it to the list of urls for the current channel.
-                        match = re.search(pattern, line)
-                        if match:
-                            if match.group(1) not in channels[current_channel]:
-                                channels[current_channel][match.group(1)] = [match.group(2)]
-                            else:
-                                channels[current_channel][match.group(1)].append(match.group(2))
-            else:
-                print(f"Failed to fetch channel items from the source URL: {url}. Status code: {response.status_code}")
-        except Exception as e:
-            print(f"Error fetching channel items from the source URL: {url}. Exception: {e}")
+            for line in lines:
+                line = line.strip()
+                if "#genre#" in line:
+                    # This is a new channel, create a new key in the dictionary.
+                    current_channel = line.split(",")[0]
+                    channels[current_channel] = {}
+                else:
+                    # This is a url, add it to the list of urls for the current channel.
+                    match = re.search(pattern, line)
+                    if match:
+                        if match.group(1) not in channels[current_channel]:
+                            channels[current_channel][match.group(1)] = [match.group(2)]
+                        else:
+                            channels[current_channel][match.group(1)].append(match.group(2))
+        else:
+            print(f"Failed to fetch channel items from the source URL: {url}")
 
     return channels
 
@@ -60,3 +57,4 @@ if __name__ == "__main__":
     channels = getChannelItems()
     # Call the function to update channel URLs in M3U format
     updateChannelUrlsM3U(channels)
+    
