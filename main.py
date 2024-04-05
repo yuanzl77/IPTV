@@ -9,8 +9,15 @@ def getChannelItems():
     channels = {}
 
     for url in Config.source_urls:
-        # Get the content from each source URL
-        response = requests.get(url)
+        # Check if the URL ends with ".m3u"
+        if url.endswith(".m3u"):
+            # Convert .m3u to .txt using the provided service
+            converted_url = f"https://fanmingming.com/txt?url={url}"
+            # Get the content from the converted URL
+            response = requests.get(converted_url)
+        else:
+            # Get the content from the original source URL
+            response = requests.get(url)
 
         # Check if the request was successful
         if response.status_code == 200:
