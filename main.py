@@ -2,7 +2,6 @@ import re
 import requests
 from config import Config
 import time
-import concurrent.futures
 
 def parse_template(template_file):
     """
@@ -28,9 +27,7 @@ def get_speed(url):
     return float("inf")
 
 def filter_urls(urls):
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        speeds = list(executor.map(get_speed, urls))
-    return [url for url, speed in zip(urls, speeds) if speed != float("inf")]
+    return [url for url in urls if get_speed(url) != float("inf")]
 
 def filter_source_urls(template_file):
     """
@@ -65,7 +62,7 @@ def filter_source_urls(template_file):
     return {channel: {key: filter_urls(urls) for key, urls in info.items()} for channel, info in filtered_channels.items()}
 
 def updateChannelUrlsM3U(channels):
-    with open("live.m3u", "w") as f:
+    with open("cs.m3u", "w") as f:
         f.write("#EXTM3U\n")
         for channel, info in channels.items():
             for key, urls in info.items():
