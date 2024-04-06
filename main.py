@@ -50,7 +50,7 @@ def updateChannelUrlsM3U(channels, template_channels):
     """
     Update the category and channel urls to the final file in M3U format
     """
-    with open("cs.m3u", "w") as f:
+    with open("live.m3u", "w") as f:
         f.write("#EXTM3U\n")
         for channel in template_channels:
             if channel in channels:
@@ -84,6 +84,6 @@ def filter_source_urls(template_file):
     return channels, template_channels
 
 if __name__ == "__main__":
-    template_file = "demo.txt"  # Replace "demo.txt" with your actual template file
+    template_file = "demo.txt"
     channels, template_channels = filter_source_urls(template_file)
     updateChannelUrlsM3U(channels, template_channels)
