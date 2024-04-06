@@ -1,27 +1,27 @@
 import re
 import requests
 from config import Config
+import time
+
+def get_speed(url):
+    start = time.time()
+    try:
+        response = requests.get(url, timeout=5)
+        if response.status_code == 200:
+            return int(round((time.time() - start) * 1000))
+    except:
+        pass
+    return float("inf")
+
+def filter_urls(urls):
+    return [url for url in urls if get_speed(url) != float("inf")]
 
 def getChannelItems():
-    """
-    Get the channel items from the source URLs
-    """
     channels = {}
 
     for url in Config.source_urls:
-        # Check if the URL ends with ".m3u"
-        if url.endswith(".m3u"):
-            # Convert .m3u to .txt using the provided service
-            converted_url = f"https://fanmingming.com/txt?url={url}"
-            # Get the content from the converted URL
-            response = requests.get(converted_url)
-        else:
-            # Get the content from the original source URL
-            response = requests.get(url)
-
-        # Check if the request was successful
+        response = requests.get(url)
         if response.status_code == 200:
-            # Extract channel items from the response text
             lines = response.text.split("\n")
             current_channel = ""
             pattern = r"^(.*?),(?!#genre#)(.*?)$"
@@ -29,39 +29,28 @@ def getChannelItems():
             for line in lines:
                 line = line.strip()
                 if "#genre#" in line:
-                    # This is a new channel, create a new key in the dictionary.
                     current_channel = line.split(",")[0]
-                    if current_channel not in channels:
-                        channels[current_channel] = {}
+                    channels.setdefault(current_channel, {})
                 else:
-                    # This is a url, add it to the list of urls for the current channel.
                     match = re.search(pattern, line)
                     if match:
-                        if match.group(1) not in channels[current_channel]:
-                            channels[current_channel][match.group(1)] = [match.group(2)]
-                        else:
-                            channels[current_channel][match.group(1)].append(match.group(2))
+                        channel_name, url = match.groups()
+                        channels[current_channel].setdefault(channel_name, []).append(url)
         else:
             print(f"Failed to fetch channel items from the source URL: {url}")
 
-    return channels
+    return {channel: {key: filter_urls(urls) for key, urls in info.items()} for channel, info in channels.items()}
 
 def updateChannelUrlsM3U(channels):
-    """
-    Update the category and channel urls to the final file in M3U format
-    """
     with open("live.m3u", "w") as f:
         f.write("#EXTM3U\n")
         for channel, info in channels.items():
             for key, urls in info.items():
                 for url in urls:
-                    if url is not None:
-                        f.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{key}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{key}.png\" group-title=\"{channel}\",{key}\n")
-                        f.write(url + "\n")
+                    f.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{key}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{key}.png\" group-title=\"{channel}\",{key}\n")
+                    f.write(url + "\n")
         f.write("\n")
 
 if __name__ == "__main__":
-    # Call the function to get channel items
     channels = getChannelItems()
-    # Call the function to update channel URLs in M3U format
     updateChannelUrlsM3U(channels)
