@@ -7,6 +7,7 @@ def getChannelItems():
     Get the channel items from the source URLs
     """
     channels = {}
+    current_channel = None
 
     for url in Config.source_urls:
         # Check if the URL ends with ".m3u"
@@ -23,7 +24,6 @@ def getChannelItems():
         if response.status_code == 200:
             # Extract channel items from the response text
             lines = response.text.split("\n")
-            current_channel = ""
             pattern = r"^(.*?),(?!#genre#)(.*?)$"
 
             for line in lines:
@@ -54,7 +54,7 @@ def updateChannelUrlsM3U(channels, template_channels):
         f.write("#EXTM3U\n")
         for channel in template_channels:
             if channel in channels:
-                for key, urls in sorted(channels[channel].items()):
+                for key, urls in channels[channel].items():
                     for url in urls:
                         if url is not None:
                             f.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{key}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{key}.png\" group-title=\"{channel}\",{key}\n")
@@ -84,6 +84,6 @@ def filter_source_urls(template_file):
     return channels, template_channels
 
 if __name__ == "__main__":
-    template_file = "demo.txt"
+    template_file = "demo.txt"  # Replace "demo.txt" with your actual template file
     channels, template_channels = filter_source_urls(template_file)
     updateChannelUrlsM3U(channels, template_channels)
