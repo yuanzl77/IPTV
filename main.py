@@ -2,6 +2,7 @@ import re
 import requests
 from config import Config
 import time
+import concurrent.futures
 
 def parse_template(template_file):
     """
@@ -27,16 +28,19 @@ def get_speed(url):
     return float("inf")
 
 def filter_urls(urls):
-    return [url for url in urls if get_speed(url) != float("inf")]
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        speeds = list(executor.map(get_speed, urls))
+    return [url for url, speed in zip(urls, speeds) if speed != float("inf")]
 
 def filter_source_urls(template_file):
     """
     Filter source URLs based on the template file.
     """
     template_channels = parse_template(template_file)
+    filtered_urls = [url for url in Config.source_urls if url.split(",", 1)[0] in template_channels]
     filtered_channels = {}
 
-    for url in Config.source_urls:
+    for url in filtered_urls:
         response = requests.get(url)
         if response.status_code == 200:
             lines = response.text.split("\n")
@@ -71,6 +75,6 @@ def updateChannelUrlsM3U(channels):
         f.write("\n")
 
 if __name__ == "__main__":
-    template_file = "demo.txt"
+    template_file = "demo.txt"  # Replace "demo.txt" with your actual template file
     channels = filter_source_urls(template_file)
     updateChannelUrlsM3U(channels)
