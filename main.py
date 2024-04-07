@@ -1,7 +1,6 @@
 import re
 import requests
 from config import Config
-from concurrent.futures import ThreadPoolExecutor
 
 def getChannelItems():
     """
@@ -84,30 +83,7 @@ def filter_source_urls(template_file):
 
     return channels, template_channels
 
-def test_url(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        return True
-    else:
-        return False
-
-def test_urls(urls):
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        results = executor.map(test_url, urls)
-    return list(results)
-
 if __name__ == "__main__":
     template_file = "demo.txt"
     channels, template_channels = filter_source_urls(template_file)
-    urls_to_test = [url for channel_info in channels.values() for urls in channel_info.values() for url in urls]
-    results = test_urls(urls_to_test)
-    
-    # Remove URLs that failed the test
-    for channel_info in channels.values():
-        for urls in channel_info.values():
-            for url in urls.copy():
-                if not results[0]:
-                    urls.remove(url)
-                results.pop(0)
-                    
     updateChannelUrlsM3U(channels, template_channels)
