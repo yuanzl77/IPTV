@@ -1,8 +1,4 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="" tvg-name="CCTV-4K" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV-4K.png" group-title="央视频道",CCTV-4K
-http://120.79.4.185/md0414.php?id=cctv4k
-#EXTINF:-1 tvg-id="" tvg-name="CCTV-8K" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV-8K.png" group-title="央视频道",CCTV-8K
-http://120.79.4.185/md0414.php?id=cctv8k
 #EXTINF:-1 tvg-id="" tvg-name="CCTV1" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV1.png" group-title="央视频道",CCTV1
 http://120.79.4.185/md0414.php?id=cctv1
 #EXTINF:-1 tvg-id="" tvg-name="CCTV1" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV1.png" group-title="央视频道",CCTV1
@@ -309,8 +305,6 @@ http://8.134.211.236:13556/china/cctv.php?id=cctv16
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226100/index.m3u8
 #EXTINF:-1 tvg-id="" tvg-name="CCTV16" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV16.png" group-title="央视频道",CCTV16
 video://https://yangshipin.cn/#/tv/home?pid=600098637
-#EXTINF:-1 tvg-id="" tvg-name="CCTV16-4K" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV16-4K.png" group-title="央视频道",CCTV16-4K
-http://120.79.4.185/md0414.php?id=cctv16-4k
 #EXTINF:-1 tvg-id="" tvg-name="CCTV17" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV17.png" group-title="央视频道",CCTV17
 http://120.79.4.185/md0414.php?id=cctv17
 #EXTINF:-1 tvg-id="" tvg-name="CCTV17" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV17.png" group-title="央视频道",CCTV17
@@ -325,34 +319,6 @@ http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225765/index.m3u8
 video://https://yangshipin.cn/#/tv/home?pid=600001810
 #EXTINF:-1 tvg-id="" tvg-name="CCTV17" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV17.png" group-title="央视频道",CCTV17
 http://36.249.151.101:9901/tsfile/live/1001_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-id="" tvg-name="CCTV兵器科技" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV兵器科技.png" group-title="央视频道",CCTV兵器科技
-http://120.79.4.185/md0414.php?id=bqkj
-#EXTINF:-1 tvg-id="" tvg-name="CCTV第一剧场" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV第一剧场.png" group-title="央视频道",CCTV第一剧场
-http://120.79.4.185/md0414.php?id=dyjc
-#EXTINF:-1 tvg-id="" tvg-name="CCTV怀旧剧场" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV怀旧剧场.png" group-title="央视频道",CCTV怀旧剧场
-http://120.79.4.185/md0414.php?id=hjjc
-#EXTINF:-1 tvg-id="" tvg-name="CCTV风云剧场" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV风云剧场.png" group-title="央视频道",CCTV风云剧场
-http://120.79.4.185/md0414.php?id=fyjc
-#EXTINF:-1 tvg-id="" tvg-name="CCTV风云音乐" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV风云音乐.png" group-title="央视频道",CCTV风云音乐
-http://120.79.4.185/md0414.php?id=fyyy
-#EXTINF:-1 tvg-id="" tvg-name="CCTV风云足球" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV风云足球.png" group-title="央视频道",CCTV风云足球
-http://120.79.4.185/md0414.php?id=fyzq
-#EXTINF:-1 tvg-id="" tvg-name="CCTV电视指南" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV电视指南.png" group-title="央视频道",CCTV电视指南
-http://120.79.4.185/md0414.php?id=dszn
-#EXTINF:-1 tvg-id="" tvg-name="CCTV女性时尚" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV女性时尚.png" group-title="央视频道",CCTV女性时尚
-http://120.79.4.185/md0414.php?id=nxss
-#EXTINF:-1 tvg-id="" tvg-name="CCTV央视文化精品" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV央视文化精品.png" group-title="央视频道",CCTV央视文化精品
-http://120.79.4.185/md0414.php?id=whjp
-#EXTINF:-1 tvg-id="" tvg-name="CCTV世界地理" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV世界地理.png" group-title="央视频道",CCTV世界地理
-http://120.79.4.185/md0414.php?id=sjdl
-#EXTINF:-1 tvg-id="" tvg-name="CCTV高尔夫网球" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV高尔夫网球.png" group-title="央视频道",CCTV高尔夫网球
-http://120.79.4.185/md0414.php?id=gefwq
-#EXTINF:-1 tvg-id="" tvg-name="CCTV央视台球" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV央视台球.png" group-title="央视频道",CCTV央视台球
-http://120.79.4.185/md0414.php?id=ystq
-#EXTINF:-1 tvg-id="" tvg-name="CCTV卫生健康" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV卫生健康.png" group-title="央视频道",CCTV卫生健康
-http://120.79.4.185/md0414.php?id=wsjk
-#EXTINF:-1 tvg-id="" tvg-name="CCTV音乐" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/CCTV音乐.png" group-title="央视频道",CCTV音乐
-http://111.74.155.231:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-id="" tvg-name="浙江卫视" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/浙江卫视.png" group-title="卫视频道",浙江卫视
 video://https://yangshipin.cn/#/tv/home?pid=600002520
 #EXTINF:-1 tvg-id="" tvg-name="浙江卫视" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/浙江卫视.png" group-title="卫视频道",浙江卫视
