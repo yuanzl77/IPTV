@@ -8,7 +8,7 @@ response = requests.get(url)
 # 检查是否成功获取内容
 if response.status_code == 200:
     # 使用正则表达式匹配央视频道中的CCTV1和CCTV2
-    pattern = re.compile(r'央视频道,#genre#\nCCTV1,(.*?)\nCCTV2,(.*?)\n', re.S)
+    pattern = re.compile(r'央卫,#genre#\nCCTV1,(.*?)\nCCTV2,(.*?)\n', re.S)
     match = pattern.search(response.text)
     if match:
         cctv1_url = match.group(1)
