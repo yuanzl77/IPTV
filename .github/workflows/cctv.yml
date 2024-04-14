@@ -32,8 +32,8 @@ jobs:
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git diff
-        if [[ -f "cs.m3u" ]]; then
-          git add cs.m3u
+        if [[ -f "cs.txt" ]]; then
+          git add cs.txt
         fi
         if ! git diff --staged --quiet; then
           git commit -m "Auto-update live.m3u"
