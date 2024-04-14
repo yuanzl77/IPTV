@@ -33,7 +33,7 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git diff
         if [[ -f "./直播/cctv.txt" ]]; then
-          git add cctv.txt
+          git add ./直播/cctv.txt
         fi
         if ! git diff --staged --quiet; then
           git commit -m "Auto-update live.m3u"
