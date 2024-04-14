@@ -2,7 +2,7 @@ import re
 import requests
 from config import Config
 
-def getChannelItems():
+def getChannelItems(template_channels):
     """
     Get the channel items from the source URLs
     """
@@ -37,10 +37,11 @@ def getChannelItems():
                     # This is a url, add it to the list of urls for the current channel.
                     match = re.search(pattern, line)
                     if match:
-                        if match.group(1) not in channels[current_channel]:
-                            channels[current_channel][match.group(1)] = [match.group(2)]
-                        else:
-                            channels[current_channel][match.group(1)].append(match.group(2))
+                        if match.group(1) in template_channels:  # Check if the channel is in the template
+                            if match.group(1) not in channels[current_channel]:
+                                channels[current_channel][match.group(1)] = [match.group(2)]
+                            else:
+                                channels[current_channel][match.group(1)].append(match.group(2))
         else:
             print(f"Failed to fetch channel items from the source URL: {url}")
 
@@ -78,8 +79,8 @@ def filter_source_urls(template_file):
     """
     Filter source URLs based on the template file.
     """
-    channels = getChannelItems()
     template_channels = parse_template(template_file)
+    channels = getChannelItems(template_channels)  # Pass template_channels to getChannelItems
 
     return channels, template_channels
 
