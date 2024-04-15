@@ -2,7 +2,7 @@ name: 央视
 
 on:
   schedule:
-    - cron: '40 17 * * *'
+    - cron: '40 21 * * *'
   workflow_dispatch:
     分支:
       - main
