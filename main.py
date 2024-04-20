@@ -52,7 +52,7 @@ def updateChannelUrlsM3U(channels, template_channels):
     Update the category and channel urls to the final file in M3U format
     """
     with open("live.m3u", "w") as f:
-        f.write("#EXTM3U\n")
+        f.write("请阅读 yuanzl77.github.io - LR\n\n#EXTM3U\n")
         for channel in template_channels:
             if channel in channels:
                 for key, urls in channels[channel].items():
