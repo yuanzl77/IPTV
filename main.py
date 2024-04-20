@@ -53,9 +53,9 @@ def updateChannelUrlsM3U(channels, template_channels):
     """
     with open("live.m3u", "w") as f:
         f.write("#EXTM3U\n")
-        f.write(f"#EXTINF:-1 tvg-id="1" tvg-name="请阅读" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/mmexport1713580051470.png" group-title="公告",请阅读\n")
+        f.write("""#EXTINF:-1 tvg-id="1" tvg-name="请阅读" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/mmexport1713580051470.png" group-title="公告",请阅读\n""")
         f.write("http://120.79.4.185/md0420.php?id=cctv4k\n")
-        f.write(f"#EXTINF:-1 tvg-id="1" tvg-name="yuanzl77.github.io" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/mmexport1713580051470.png" group-title="公告",yuanzl77.github.io\n")
+        f.write("""#EXTINF:-1 tvg-id="1" tvg-name="yuanzl77.github.io" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/mmexport1713580051470.png" group-title="公告",yuanzl77.github.io\n""")
         f.write("http://120.79.4.185/md0420.php?id=cctv8k\n")
         for channel in template_channels:
             if channel in channels:
