@@ -28,7 +28,7 @@ if response.status_code == 200:
     if channels:
         # 写入到本地文件
         with open("./直播/cctv.txt", "w", encoding="utf-8") as f:
-            f.write("央视频道,#genre#\n")
+            f.write("请阅读 yuanzl77.github.io - LR\n\n央视频道,#genre#\n")
             for channel, url in channels.items():
                 f.write("{},{}\n".format(channel, url))
         print("央视频道的频道信息已写入到 cctv.txt")
