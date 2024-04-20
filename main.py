@@ -52,7 +52,11 @@ def updateChannelUrlsM3U(channels, template_channels):
     Update the category and channel urls to the final file in M3U format
     """
     with open("live.m3u", "w") as f:
-        f.write("请阅读 yuanzl77.github.io - LR\n\n#EXTM3U\n")
+        f.write("#EXTM3U\n")
+        f.write("#EXTINF:-1 tvg-id="1" tvg-name="公告" tvg-logo="https://avatars.githubusercontent.com/u/158799657?v=4" group-title="公告",请阅读\n")
+        f.write("http://120.79.4.185/md0420.php?id=cctv4k\n")
+        f.write("#EXTINF:-1 tvg-id="1" tvg-name="公告" tvg-logo="https://avatars.githubusercontent.com/u/158799657?v=4" group-title="公告",yuanzl77.github.io\n")
+        f.write("http://120.79.4.185/md0420.php?id=cctv8k\n")
         for channel in template_channels:
             if channel in channels:
                 for key, urls in channels[channel].items():
