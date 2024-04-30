@@ -77,7 +77,7 @@ def parse_template(template_file):
             if line and not line.startswith("#"):
                 channel, _ = line.split(",", 1)
                 # 去除特定符号，如"-"
-                channel = channel.replace(-, "")  
+                channel = channel.replace("-", "")  
                 channels.append(channel)
     return channels
 
