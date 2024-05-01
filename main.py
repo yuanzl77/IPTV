@@ -1,15 +1,55 @@
 import re
 import requests
-from config import Config
+import urllib.parse
+import ipaddress
+import config
 
-def getChannelItems(template_channels):
+def is_ipv6(url):
+    """
+    Check if the url is ipv6
+    """
+    try:
+        host = urllib.parse.urlparse(url).hostname
+        ipaddress.IPv6Address(host)
+        return True
+    except ValueError:
+        return False
+
+def checkUrlIPVType(url):
+    """
+    Check if the url is compatible with the ipv type in the config
+    """
+    ipv_type = getattr(config, "ipv_type", "ipv4")
+    if ipv_type == "ipv4":
+        return not is_ipv6(url)
+    elif ipv_type == "ipv6":
+        return is_ipv6(url)
+    else:
+        return True
+
+def parse_template(template_file):
+    """
+    Parse the template file to extract channel names.
+    """
+    channels = []
+    with open(template_file, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                channel, _ = line.split(",", 1)
+                # Remove special characters like "-"
+                channel = channel.replace("-", "")  
+                channels.append(channel)
+    return channels
+
+def getChannelItems(template_channels, source_urls):
     """
     Get the channel items from the source URLs
     """
     channels = {}
     current_channel = None
 
-    for url in Config.source_urls:
+    for url in source_urls:
         # Check if the URL ends with ".m3u"
         if url.endswith(".m3u"):
             # Convert .m3u to .txt using the provided service
@@ -37,15 +77,32 @@ def getChannelItems(template_channels):
                     # This is a url, add it to the list of urls for the current channel.
                     match = re.search(pattern, line)
                     if match:
-                        if match.group(1) in template_channels:  # Check if the channel is in the template
-                            if match.group(1) not in channels[current_channel]:
-                                channels[current_channel][match.group(1)] = [match.group(2)]
+                        # Check if the channel name matches any of the template channels
+                        matched_channel = None
+                        for template_channel in template_channels:
+                            if re.fullmatch(template_channel, match.group(1)):
+                                matched_channel = template_channel
+                                break
+                        if matched_channel:
+                            if matched_channel not in channels[current_channel]:
+                                channels[current_channel][matched_channel] = [match.group(2)]
                             else:
-                                channels[current_channel][match.group(1)].append(match.group(2))
+                                channels[current_channel][matched_channel].append(match.group(2))
         else:
             print(f"Failed to fetch channel items from the source URL: {url}")
 
     return channels
+
+def filter_source_urls(template_file):
+    """
+    Filter source URLs based on the template file and the specified IP version.
+    """
+    template_channels = parse_template(template_file)
+    source_urls = [url for url in config.source_urls if checkUrlIPVType(url)]
+
+    channels = getChannelItems(template_channels, source_urls)  # Pass source_urls to getChannelItems
+
+    return channels, template_channels
 
 def updateChannelUrlsM3U(channels, template_channels):
     """
@@ -65,30 +122,6 @@ def updateChannelUrlsM3U(channels, template_channels):
                             f.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{key}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{key}.png\" group-title=\"{channel}\",{key}\n")
                             f.write(url + "\n")
         f.write("\n")
-
-def parse_template(template_file):
-    """
-    Parse the template file to extract channel names.
-    """
-    channels = []
-    with open(template_file, "r") as f:
-        for line in f:
-            line = line.strip()
-            if line and not line.startswith("#"):
-                channel, _ = line.split(",", 1)
-                # 去除特定符号，如"-"
-                channel = channel.replace("-", "")  
-                channels.append(channel)
-    return channels
-
-def filter_source_urls(template_file):
-    """
-    Filter source URLs based on the template file.
-    """
-    template_channels = parse_template(template_file)
-    channels = getChannelItems(template_channels)  # Pass template_channels to getChannelItems
-
-    return channels, template_channels
 
 if __name__ == "__main__":
     template_file = "demo.txt"
