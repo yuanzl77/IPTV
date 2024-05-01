@@ -1,4 +1,3 @@
-ipv_type = "ipv4"
 source_urls = [
     "https://raw.githubusercontent.com/yuanzl77/IPTV/main/直播/cctv.txt",
     "https://raw.githubusercontent.com/yuanzl77/IPTV/main/直播/央视频道.txt",
