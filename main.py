@@ -6,15 +6,20 @@ def parse_template(template_file):
     """
     Parse the template file to extract channel names.
     """
+    template_channels = []
     with open(template_file, "r") as f:
-        return [line.split(",")[0].replace("-", "") for line in f if line.strip() and not line.startswith("#")]
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                channel_name = line.split(",")[0].strip()
+                template_channels.append(channel_name)
+    return template_channels
 
 def getChannelItems(template_channels, source_urls):
     """
     Get the channel items from the source URLs
     """
     channels = {}
-    pattern = r"^(.*?),(?!#genre#)(.*?)$"
 
     for url in source_urls:
         if url.endswith(".m3u"):
@@ -34,12 +39,11 @@ def getChannelItems(template_channels, source_urls):
                     if current_channel not in channels:
                         channels[current_channel] = {}
                 else:
-                    match = re.search(pattern, line)
+                    match = re.match(r"^(.*?),(?!#genre#)(.*?)$", line)
                     if match:
-                        for template_channel in template_channels:
-                            if re.fullmatch(template_channel, match.group(1)):
-                                channels.setdefault(current_channel, {}).setdefault(template_channel, []).append(match.group(2))
-                                break
+                        channel_name = match.group(1).strip()
+                        if channel_name in template_channels:
+                            channels.setdefault(current_channel, {}).setdefault(channel_name, []).append(match.group(2))
         else:
             print(f"Failed to fetch channel items from the source URL: {url}")
 
@@ -57,19 +61,24 @@ def updateChannelUrlsM3U(channels, template_channels):
     """
     Update the category and channel urls to the final file in M3U format
     """
+    written_urls = set()  # Set to store written URLs
+
     with open("live.m3u", "w") as f:
         f.write("#EXTM3U\n")
         f.write("""#EXTINF:-1 tvg-id="1" tvg-name="请阅读" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/mmexport1713580051470.png" group-title="公告",请阅读\n""")
         f.write("https://liuliuliu.tv/api/channels/1997/stream\n")
         f.write("""#EXTINF:-1 tvg-id="1" tvg-name="yuanzl77.github.io" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/mmexport1713580051470.png" group-title="公告",yuanzl77.github.io\n""")
         f.write("https://liuliuliu.tv/api/channels/233/stream\n")
-        for channel in template_channels:
-            if channel in channels:
-                for key, urls in channels[channel].items():
+
+        for channel_name in template_channels:
+            if channel_name in channels:
+                for key, urls in channels[channel_name].items():
                     for url in urls:
-                        if url:
-                            f.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{key}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{key}.png\" group-title=\"{channel}\",{key}\n")
+                        if url and url not in written_urls:  # Check if URL is not already written                            
+                            f.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{key}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{key}.png\" group-title=\"{channel_name}\",{key}\n")
                             f.write(url + "\n")
+                            written_urls.add(url)  # Add URL to written URLs set
+
         f.write("\n")
 
 if __name__ == "__main__":
