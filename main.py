@@ -1,25 +1,36 @@
 import re
 import requests
 import config
+from collections import OrderedDict
 
 def parse_template(template_file):
     """
     Parse the template file to extract channel names.
     """
-    template_channels = []
+    template_channels = OrderedDict()
+    current_category = None
+
     with open(template_file, "r") as f:
         for line in f:
             line = line.strip()
             if line and not line.startswith("#"):
-                channel_name = line.split(",")[0].strip()
-                template_channels.append(channel_name)
+                if "#genre#" in line:
+                    current_category = line.split(",")[0].strip()
+                    template_channels[current_category] = []
+                elif current_category:
+                    channel_name = line.split(",")[0].strip()
+                    template_channels[current_category].append(channel_name)
+
     return template_channels
 
 def getChannelItems(template_channels, source_urls):
     """
     Get the channel items from the source URLs
     """
-    channels = {}
+    channels = OrderedDict()
+
+    for category in template_channels:
+        channels[category] = OrderedDict()
 
     for url in source_urls:
         if url.endswith(".m3u"):
@@ -32,18 +43,18 @@ def getChannelItems(template_channels, source_urls):
             response.encoding = 'utf-8'
             lines = response.text.split("\n")
 
+            current_category = None
+
             for line in lines:
                 line = line.strip()
                 if "#genre#" in line:
-                    current_channel = line.split(",")[0]
-                    if current_channel not in channels:
-                        channels[current_channel] = {}
+                    current_category = line.split(",")[0].strip()
                 else:
                     match = re.match(r"^(.*?),(?!#genre#)(.*?)$", line)
-                    if match:
+                    if match and current_category in channels:
                         channel_name = match.group(1).strip()
-                        if channel_name in template_channels:
-                            channels.setdefault(current_channel, {}).setdefault(channel_name, []).append(match.group(2))
+                        if channel_name in template_channels[current_category]:
+                            channels[current_category].setdefault(channel_name, []).append(match.group(2).strip())
         else:
             print(f"Failed to fetch channel items from the source URL: {url}")
 
@@ -54,12 +65,12 @@ def filter_source_urls(template_file):
     Filter source URL.
     """
     template_channels = parse_template(template_file)
-    source_urls = [url for url in config.source_urls]
+    source_urls = config.source_urls
     return getChannelItems(template_channels, source_urls), template_channels
 
 def updateChannelUrlsM3U(channels, template_channels):
     """
-    Update the category and channel urls to the final file in M3U format
+    Update the category and channel URLs to the final file in M3U format
     """
     written_urls = set()  # Set to store written URLs
 
@@ -70,14 +81,15 @@ def updateChannelUrlsM3U(channels, template_channels):
         f.write("""#EXTINF:-1 tvg-id="1" tvg-name="yuanzl77.github.io" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/mmexport1713580051470.png" group-title="公告",yuanzl77.github.io\n""")
         f.write("https://liuliuliu.tv/api/channels/233/stream\n")
 
-        for channel_name in template_channels:
-            if channel_name in channels:
-                for key, urls in channels[channel_name].items():
-                    for url in urls:
-                        if url and url not in written_urls:  # Check if URL is not already written                            
-                            f.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{key}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{key}.png\" group-title=\"{channel_name}\",{key}\n")
-                            f.write(url + "\n")
-                            written_urls.add(url)  # Add URL to written URLs set
+        for category, channel_list in template_channels.items():
+            if category in channels:
+                for channel_name in channel_list:
+                    if channel_name in channels[category]:
+                        for url in channels[category][channel_name]:
+                            if url and url not in written_urls:  # Check if URL is not already written
+                                f.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
+                                f.write(url + "\n")
+                                written_urls.add(url)  # Add URL to written URLs set
 
         f.write("\n")
 
