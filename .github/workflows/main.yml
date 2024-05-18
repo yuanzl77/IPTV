@@ -35,6 +35,9 @@ jobs:
         if [[ -f "live.m3u" ]]; then
           git add live.m3u
         fi
+        if [[ -f "live.txt" ]]; then
+          git add live.txt
+        fi
         if ! git diff --staged --quiet; then
           git commit -m "Auto-update live.m3u"
           git push
