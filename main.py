@@ -23,6 +23,38 @@ def parse_template(template_file):
 
     return template_channels
 
+def fetch_channels(url):
+    """
+    Fetch channel items from a URL.
+    """
+    channels = OrderedDict()
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        response.encoding = 'utf-8'
+        lines = response.text.split("\n")
+
+        current_category = None
+
+        for line in lines:
+            line = line.strip()
+            if "#genre#" in line:
+                current_category = line.split(",")[0].strip()
+                channels[current_category] = []
+            elif current_category:
+                match = re.match(r"^(.*?),(.*?)$", line)
+                if match:
+                    channel_name = match.group(1).strip()
+                    channel_url = match.group(2).strip()
+                    channels[current_category].append((channel_name, channel_url))
+                elif line:  # If it's not an empty line and doesn't match comma-separated pattern
+                    channels[current_category].append((line, ''))
+    except requests.RequestException as e:
+        print(f"Failed to fetch channels from the URL: {url}, Error: {e}")
+
+    return channels
+
 def getChannelItems(template_channels, source_urls):
     """
     Get the channel items from the source URLs
@@ -60,13 +92,43 @@ def getChannelItems(template_channels, source_urls):
 
     return channels
 
+def match_channels(template_channels, all_channels):
+    """
+    Match the channels from all channels with the template channels.
+    """
+    matched_channels = OrderedDict()
+
+    for category, channel_list in template_channels.items():
+        matched_channels[category] = OrderedDict()
+        for channel_name in channel_list:
+            for online_category, online_channel_list in all_channels.items():
+                for online_channel_name, online_channel_url in online_channel_list:
+                    if channel_name == online_channel_name:
+                        matched_channels[category].setdefault(channel_name, []).append(online_channel_url)
+
+    return matched_channels
+
 def filter_source_urls(template_file):
     """
     Filter source URL.
     """
     template_channels = parse_template(template_file)
     source_urls = config.source_urls
-    return getChannelItems(template_channels, source_urls), template_channels
+
+    # Fetch channels from all source URLs
+    all_channels = OrderedDict()
+    for url in source_urls:
+        fetched_channels = fetch_channels(url)
+        for category, channel_list in fetched_channels.items():
+            if category in all_channels:
+                all_channels[category].extend(channel_list)
+            else:
+                all_channels[category] = channel_list
+
+    # Match the fetched channels with the template
+    matched_channels = match_channels(template_channels, all_channels)
+
+    return matched_channels, template_channels
 
 def updateChannelUrlsM3U(channels, template_channels):
     """
