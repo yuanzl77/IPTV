@@ -138,9 +138,9 @@ def updateChannelUrlsM3U(channels, template_channels):
 
     with open("live.m3u", "w", encoding="utf-8") as f_m3u:
         f_m3u.write("#EXTM3U\n")
-        f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="请阅读" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/mmexport1713580051470.png" group-title="公告",请阅读\n""")
+        f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="请阅读" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",请阅读\n""")
         f_m3u.write("https://liuliuliu.tv/api/channels/1997/stream\n")
-        f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="yuanzl77.github.io" tvg-logo="https://gitee.com/yuanzl77/TVBox-logo/raw/main/mmexport1713580051470.png" group-title="公告",yuanzl77.github.io\n""")
+        f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="yuanzl77.github.io" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",yuanzl77.github.io\n""")
         f_m3u.write("https://liuliuliu.tv/api/channels/233/stream\n")
 
         with open("live.txt", "w", encoding="utf-8") as f_txt:
