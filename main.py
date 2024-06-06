@@ -2,6 +2,7 @@ import re
 import requests
 import config
 from collections import OrderedDict
+from datetime import datetime
 
 def parse_template(template_file):
     """
@@ -136,12 +137,18 @@ def updateChannelUrlsM3U(channels, template_channels):
     """
     written_urls = set()  # Set to store written URLs
 
+    current_date = datetime.now().strftime("%Y-%m-%d")
+
     with open("live.m3u", "w", encoding="utf-8") as f_m3u:
         f_m3u.write("#EXTM3U\n")
         f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="请阅读" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",请阅读\n""")
         f_m3u.write("https://liuliuliu.tv/api/channels/1997/stream\n")
         f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="yuanzl77.github.io" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",yuanzl77.github.io\n""")
         f_m3u.write("https://liuliuliu.tv/api/channels/233/stream\n")
+        f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="更新日期" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",更新日期\n""")
+        f_m3u.write("https://gitlab.com/lr77/IPTV/-/raw/main/%E4%B8%BB%E8%A7%92.mp4\n")
+        f_m3u.write(f"""#EXTINF:-1 tvg-id="1" tvg-name="{current_date}" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",{current_date}\n""")
+        f_m3u.write("https://gitlab.com/lr77/IPTV/-/raw/main/%E8%B5%B7%E9%A3%8E%E4%BA%86.mp4\n")
 
         with open("live.txt", "w", encoding="utf-8") as f_txt:
             for category, channel_list in template_channels.items():
@@ -150,7 +157,7 @@ def updateChannelUrlsM3U(channels, template_channels):
                     for channel_name in channel_list:
                         if channel_name in channels[category]:
                             for url in channels[category][channel_name]:
-                                if url and url not in written_urls:  # Check if URL is not already written
+                                if url and url not in written_urls and not any(blacklist in url for blacklist in config.url_blacklist):  # Check if URL is not already written and not in blacklist
                                     f_m3u.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
                                     f_m3u.write(url + "\n")
                                     f_txt.write(f"{channel_name},{url}\n")
