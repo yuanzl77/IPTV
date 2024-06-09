@@ -140,7 +140,7 @@ def updateChannelUrlsM3U(channels, template_channels):
     current_date = datetime.now().strftime("%Y-%m-%d")
 
     with open("live.m3u", "w", encoding="utf-8") as f_m3u:
-        f_m3u.write("#EXTM3U\n")
+        f_m3u.write("#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml","http://epg.51zmt.top:8000/difang.xml","http://epg.51zmt.top:8000/e.xml","https://epg.112114.xyz/pp.xml"\n")
         f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="请阅读" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",请阅读\n""")
         f_m3u.write("https://liuliuliu.tv/api/channels/1997/stream\n")
         f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="yuanzl77.github.io" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",yuanzl77.github.io\n""")
