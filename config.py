@@ -5,6 +5,7 @@ source_urls = [
     "https://tv.youdu.fan:666/live/",
     "http://175.178.251.183:6689/livv.txt",
     "http://175.178.251.183:6689/livv2.txt",
+    "https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt",
     "https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1715581924111/live1.txt",
     "http://rihou.cc:88/hccx/zb.txt",
     "https://raw.githubusercontent.com/Guovin/TV/gd/result.txt",
