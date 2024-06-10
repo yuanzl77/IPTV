@@ -8,7 +8,7 @@ source_urls = [
     "https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt",
     "https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1715581924111/live1.txt",
     "http://rihou.cc:88/hccx/zb.txt",
-    "https://raw.githubusercontent.com/Guovin/TV/gd/result.txt",
+    "https://live.goodiptv.club/api/getlive.php",
     "https://raw.githubusercontent.com/PizazzGY/TVBox_warehouse/main/live.txt",
     "https://raw.githubusercontent.com/yuanzl77/IPTV/main/直播/ipv6.txt",
     "https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt"
