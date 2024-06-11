@@ -10,7 +10,7 @@ source_urls = [
     "http://rihou.cc:88/hccx/zb.txt",
     "https://live.goodiptv.club/api/getlive.php",
     "https://raw.githubusercontent.com/PizazzGY/TVBox_warehouse/main/live.txt",
-    "https://raw.githubusercontent.com/yuanzl77/IPTV/main/直播/ipv6.txt",
+    "https://raw.githubusercontent.com/hiyoi/IPTV/main/IPTV.m3u",
     "https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt"
 ]
 
