@@ -20,7 +20,7 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Cache pip
+    - name: Cache dependencies
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
@@ -39,10 +39,11 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        if git diff --quiet; then
-          echo "No changes detected, skipping commit."
-        else
-          git add live.m3u live.txt || true
-          git commit -m "Auto-update live.m3u"
+        git add -A
+        if ! git diff --staged --quiet; then
+          git commit -m "Auto-update live files"
           git push
         fi
+
+    env:
+      TZ: Asia/Shanghai
