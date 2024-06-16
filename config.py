@@ -4,6 +4,7 @@ source_urls = [
     "https://raw.githubusercontent.com/Fairy8o/IPTV/main/DIYP-v4.txt",
     "https://tv.youdu.fan:666/live/",
     "http://175.178.251.183:6689/livv.txt",
+    "https://fm1077.serv00.net/litv.txt",
     "https://fanmingming.com/txt?url=http://175.178.251.183:6689/livv2.m3u",
     "https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt",
     "https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1715581924111/live1.txt",
