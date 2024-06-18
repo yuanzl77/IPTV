@@ -5,9 +5,6 @@ from collections import OrderedDict
 from datetime import datetime
 
 def parse_template(template_file):
-    """
-    Parse the template file to extract channel names.
-    """
     template_channels = OrderedDict()
     current_category = None
 
@@ -25,9 +22,6 @@ def parse_template(template_file):
     return template_channels
 
 def fetch_channels(url):
-    """
-    Fetch channel items from a URL.
-    """
     channels = OrderedDict()
 
     try:
@@ -38,28 +32,40 @@ def fetch_channels(url):
 
         current_category = None
 
-        for line in lines:
-            line = line.strip()
-            if "#genre#" in line:
-                current_category = line.split(",")[0].strip()
-                channels[current_category] = []
-            elif current_category:
-                match = re.match(r"^(.*?),(.*?)$", line)
-                if match:
-                    channel_name = match.group(1).strip()
-                    channel_url = match.group(2).strip()
-                    channels[current_category].append((channel_name, channel_url))
-                elif line:  # If it's not an empty line and doesn't match comma-separated pattern
-                    channels[current_category].append((line, ''))
+        if url.endswith(".m3u"):
+            for line in lines:
+                line = line.strip()
+                if line.startswith("#EXTINF"):
+                    match = re.search(r'group-title="(.*?)",(.*)', line)
+                    if match:
+                        current_category = match.group(1).strip()
+                        channel_name = match.group(2).strip()
+                        if current_category not in channels:
+                            channels[current_category] = []
+                elif line and not line.startswith("#"):
+                    channel_url = line.strip()
+                    if current_category and channel_name:
+                        channels[current_category].append((channel_name, channel_url))
+        else:
+            for line in lines:
+                line = line.strip()
+                if "#genre#" in line:
+                    current_category = line.split(",")[0].strip()
+                    channels[current_category] = []
+                elif current_category:
+                    match = re.match(r"^(.*?),(.*?)$", line)
+                    if match:
+                        channel_name = match.group(1).strip()
+                        channel_url = match.group(2).strip()
+                        channels[current_category].append((channel_name, channel_url))
+                    elif line:
+                        channels[current_category].append((line, ''))
     except requests.RequestException as e:
         print(f"Failed to fetch channels from the URL: {url}, Error: {e}")
 
     return channels
 
 def getChannelItems(template_channels, source_urls):
-    """
-    Get the channel items from the source URLs
-    """
     channels = OrderedDict()
 
     for category in template_channels:
@@ -80,23 +86,32 @@ def getChannelItems(template_channels, source_urls):
 
             for line in lines:
                 line = line.strip()
-                if "#genre#" in line:
-                    current_category = line.split(",")[0].strip()
+                if url.endswith(".m3u"):
+                    if line.startswith("#EXTINF"):
+                        match = re.search(r'group-title="(.*?)",(.*)', line)
+                        if match:
+                            current_category = match.group(1).strip()
+                            channel_name = match.group(2).strip()
+                    elif line and not line.startswith("#"):
+                        channel_url = line.strip()
+                        if current_category and channel_name:
+                            if current_category in channels:
+                                channels[current_category].setdefault(channel_name, []).append(channel_url)
                 else:
-                    match = re.match(r"^(.*?),(?!#genre#)(.*?)$", line)
-                    if match and current_category in channels:
-                        channel_name = match.group(1).strip()
-                        if channel_name in template_channels[current_category]:
-                            channels[current_category].setdefault(channel_name, []).append(match.group(2).strip())
+                    if "#genre#" in line:
+                        current_category = line.split(",")[0].strip()
+                    else:
+                        match = re.match(r"^(.*?),(?!#genre#)(.*?)$", line)
+                        if match and current_category in channels:
+                            channel_name = match.group(1).strip()
+                            if channel_name in template_channels[current_category]:
+                                channels[current_category].setdefault(channel_name, []).append(match.group(2).strip())
         else:
             print(f"Failed to fetch channel items from the source URL: {url}")
 
     return channels
 
 def match_channels(template_channels, all_channels):
-    """
-    Match the channels from all channels with the template channels.
-    """
     matched_channels = OrderedDict()
 
     for category, channel_list in template_channels.items():
@@ -110,13 +125,9 @@ def match_channels(template_channels, all_channels):
     return matched_channels
 
 def filter_source_urls(template_file):
-    """
-    Filter source URL.
-    """
     template_channels = parse_template(template_file)
     source_urls = config.source_urls
 
-    # Fetch channels from all source URLs
     all_channels = OrderedDict()
     for url in source_urls:
         fetched_channels = fetch_channels(url)
@@ -126,16 +137,15 @@ def filter_source_urls(template_file):
             else:
                 all_channels[category] = channel_list
 
-    # Match the fetched channels with the template
     matched_channels = match_channels(template_channels, all_channels)
 
     return matched_channels, template_channels
 
+def is_ipv6(url):
+    return re.match(r'^http:\/\/\[[0-9a-fA-F:]+\]', url) is not None
+
 def updateChannelUrlsM3U(channels, template_channels):
-    """
-    Update the category and channel URLs to the final file in M3U format
-    """
-    written_urls = set()  # Set to store written URLs
+    written_urls = set()
 
     current_date = datetime.now().strftime("%Y-%m-%d")
 
@@ -156,12 +166,13 @@ def updateChannelUrlsM3U(channels, template_channels):
                 if category in channels:
                     for channel_name in channel_list:
                         if channel_name in channels[category]:
-                            for url in channels[category][channel_name]:
-                                if url and url not in written_urls and not any(blacklist in url for blacklist in config.url_blacklist):  # Check if URL is not already written and not in blacklist
+                            sorted_urls = sorted(channels[category][channel_name], key=lambda url: not is_ipv6(url) if config.ip_version_priority == "ipv6" else is_ipv6(url))
+                            for url in sorted_urls:
+                                if url and url not in written_urls and not any(blacklist in url for blacklist in config.url_blacklist):
                                     f_m3u.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
                                     f_m3u.write(url + "\n")
                                     f_txt.write(f"{channel_name},{url}\n")
-                                    written_urls.add(url)  # Add URL to written URLs set
+                                    written_urls.add(url)
 
             f_txt.write("\n")
 
