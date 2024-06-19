@@ -19,5 +19,6 @@ source_urls = [
 ]
 url_blacklist = [
     "epg.pw/stream/",
-    "103.40.13.71:12390/mytv/live.php"
+    "103.40.13.71:12390/mytv/live.php",
+    "[2409:8087:1a01:df::4077]/PLTV/"
 ]
