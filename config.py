@@ -15,7 +15,6 @@ source_urls = [
     "http://rihou.cc:88/hccx/zb.txt",
     "https://raw.githubusercontent.com/vbskycn/iptv/master/tv/hd.txt",
     "https://cdn.jsdelivr.net/gh/YueChan/live@main/IPTV.m3u",
-    "https://raw.githubusercontent.com/PizazzGY/TVBox_warehouse/main/live.txt",
     "https://raw.githubusercontent.com/hiyoi/IPTV/main/IPTV.m3u",
     "https://raw.githubusercontent.com/cymz6/AutoIPTV-Hotel/main/lives.txt",
     "https://fm1077.serv00.net/SmartTV.m3u",
