@@ -1,8 +1,8 @@
 import re
 import requests
-import config
 from collections import OrderedDict
 from datetime import datetime
+import config
 
 def parse_template(template_file):
     template_channels = OrderedDict()
@@ -65,52 +65,6 @@ def fetch_channels(url):
 
     return channels
 
-def getChannelItems(template_channels, source_urls):
-    channels = OrderedDict()
-
-    for category in template_channels:
-        channels[category] = OrderedDict()
-
-    for url in source_urls:
-        if url.endswith(".m3u"):
-            converted_url = f"https://fanmingming.com/txt?url={url}"
-            response = requests.get(converted_url)
-        else:
-            response = requests.get(url)
-
-        if response.status_code == 200:
-            response.encoding = 'utf-8'
-            lines = response.text.split("\n")
-
-            current_category = None
-
-            for line in lines:
-                line = line.strip()
-                if url.endswith(".m3u"):
-                    if line.startswith("#EXTINF"):
-                        match = re.search(r'group-title="(.*?)",(.*)', line)
-                        if match:
-                            current_category = match.group(1).strip()
-                            channel_name = match.group(2).strip()
-                    elif line and not line.startswith("#"):
-                        channel_url = line.strip()
-                        if current_category and channel_name:
-                            if current_category in channels:
-                                channels[current_category].setdefault(channel_name, []).append(channel_url)
-                else:
-                    if "#genre#" in line:
-                        current_category = line.split(",")[0].strip()
-                    else:
-                        match = re.match(r"^(.*?),(?!#genre#)(.*?)$", line)
-                        if match and current_category in channels:
-                            channel_name = match.group(1).strip()
-                            if channel_name in template_channels[current_category]:
-                                channels[current_category].setdefault(channel_name, []).append(match.group(2).strip())
-        else:
-            print(f"Failed to fetch channel items from the source URL: {url}")
-
-    return channels
-
 def match_channels(template_channels, all_channels):
     matched_channels = OrderedDict()
 
@@ -167,12 +121,22 @@ def updateChannelUrlsM3U(channels, template_channels):
                     for channel_name in channel_list:
                         if channel_name in channels[category]:
                             sorted_urls = sorted(channels[category][channel_name], key=lambda url: not is_ipv6(url) if config.ip_version_priority == "ipv6" else is_ipv6(url))
+                            line_number = 1
                             for url in sorted_urls:
                                 if url and url not in written_urls and not any(blacklist in url for blacklist in config.url_blacklist):
+                                    url_suffix = f"$LR•IPV6『线路{line_number}』" if is_ipv6(url) else f"$LR•IPV4『线路{line_number}』"
+                                    if '$' in url:
+                                        base_url = url.split('$', 1)[0]
+                                    else:
+                                        base_url = url
+                                    
+                                    new_url = f"{base_url}{url_suffix}"
+                                    
                                     f_m3u.write(f"#EXTINF:-1 tvg-id=\"\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
-                                    f_m3u.write(url + "\n")
-                                    f_txt.write(f"{channel_name},{url}\n")
+                                    f_m3u.write(new_url + "\n")
+                                    f_txt.write(f"{channel_name},{new_url}\n")
                                     written_urls.add(url)
+                                    line_number += 1
 
             f_txt.write("\n")
 
