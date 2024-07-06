@@ -4,7 +4,7 @@
 - 极速2G2H: http://175.178.251.183:6689/tv.txt
 - 不了解TVBox，请自行了解(b站有教学)
 
-- 国内:http://175.178.251.183:6689/live.m3u
+- 国内(每三日更新):http://175.178.251.183:6689/live.m3u
 - 仓库文件加速1:https://gh.con.sh/https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.m3u
 - 仓库文件加速2:https://cdn.jsdelivr.net/gh/yuanzl77/IPTV@latest/live.m3u
 
