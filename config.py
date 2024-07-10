@@ -16,7 +16,8 @@ source_urls = [
     "https://raw.githubusercontent.com/cymz6/AutoIPTV-Hotel/main/lives.txt",
     "https://raw.githubusercontent.com/PizazzGY/TVBox_warehouse/main/live.txt",
     "https://fm1077.serv00.net/SmartTV.m3u",
-    "https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt"
+    "https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt",
+    "https://yang-1989.eu.org/m3u/Live"
 ]
 url_blacklist = [
     "epg.pw/stream/",
