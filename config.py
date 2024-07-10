@@ -28,5 +28,10 @@ url_blacklist = [
     "8.137.59.151",
     "[2409:8087:7000:20:1000::22]:6060",
     "histar.zapi.us.kg",
-    "www.tfiplaytv.vip"
+    "www.tfiplaytv.vip",
+    "dp.sxtv.top",
+    "111.230.30.193",
+    "148.135.93.213:81",
+    "live.goodiptv.club",
+    "iptv.luas.edu.cn"
 ]
