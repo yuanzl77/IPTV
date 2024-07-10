@@ -12,10 +12,10 @@ source_urls = [
     "https://fm1077.serv00.net/litv.txt",
     "https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt",
     "https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1715581924111/live1.txt",
-    "http://rihou.cc:88/hccx/zb.txt",
     "https://raw.githubusercontent.com/vbskycn/iptv/master/tv/hd.txt",
     "https://cdn.jsdelivr.net/gh/YueChan/live@main/IPTV.m3u",
     "https://raw.githubusercontent.com/cymz6/AutoIPTV-Hotel/main/lives.txt",
+    "https://raw.githubusercontent.com/PizazzGY/TVBox_warehouse/main/live.txt",
     "https://fm1077.serv00.net/SmartTV.m3u",
     "https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt"
 ]
