@@ -24,5 +24,9 @@ url_blacklist = [
     "[2409:8087:1a01:df::4077]/PLTV/",
     "8.210.140.75:68",
     "154.12.50.54",
-    "yinhe.live_hls.zte.com"
+    "yinhe.live_hls.zte.com",
+    "8.137.59.151",
+    "[2409:8087:7000:20:1000::22]:6060",
+    "histar.zapi.us.kg",
+    "www.tfiplaytv.vip"
 ]
