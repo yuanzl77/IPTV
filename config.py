@@ -1,4 +1,5 @@
 ip_version_priority = "ipv6"
+
 source_urls = [
     "https://live.fanmingming.com/tv/m3u/ipv6.m3u",
     "https://raw.githubusercontent.com/yuanzl77/IPTV/main/直播/央视频道.txt",
@@ -11,6 +12,7 @@ source_urls = [
     "https://fm1077.serv00.net/litv.txt",
     "https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt",
     "https://raw.githubusercontent.com/qingwen07/awesome-iptv/main/tvbox_live_all.txt",
+    "https://v.nxog.top/m/tv/1/",
     "https://raw.githubusercontent.com/vbskycn/iptv/master/tv/hd.txt",
     "https://cdn.jsdelivr.net/gh/YueChan/live@main/IPTV.m3u",
     "https://raw.githubusercontent.com/cymz6/AutoIPTV-Hotel/main/lives.txt",
@@ -19,6 +21,7 @@ source_urls = [
     "https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt",
     "https://yang-1989.eu.org/m3u/Live"
 ]
+
 url_blacklist = [
     "epg.pw/stream/",
     "103.40.13.71:12390",
@@ -35,4 +38,24 @@ url_blacklist = [
     "148.135.93.213:81",
     "live.goodiptv.club",
     "iptv.luas.edu.cn"
+]
+
+announcements = [
+    {
+        "channel": "公告",
+        "entries": [
+            {"name": "请阅读777", "url": "https://liuliuliu.tv/api/channels/1997/stream", "logo": "http://175.178.251.183:6689/LR.jpg"},
+            {"name": "yuanzl77.github.io", "url": "https://liuliuliu.tv/api/channels/233/stream", "logo": "http://175.178.251.183:6689/LR.jpg"},
+            {"name": "更新日期", "url": "https://gitlab.com/lr77/IPTV/-/raw/main/%E4%B8%BB%E8%A7%92.mp4", "logo": "http://175.178.251.183:6689/LR.jpg"},
+            {"name": None, "url": "https://gitlab.com/lr77/IPTV/-/raw/main/%E8%B5%B7%E9%A3%8E%E4%BA%86.mp4", "logo": "http://175.178.251.183:6689/LR.jpg"}
+        ]
+    }
+]
+
+epg_urls = [
+    "https://live.fanmingming.com/e.xml",
+    "http://epg.51zmt.top:8000/difang.xml",
+    "https://epg.v1.mk/fy.xml",
+    "http://epg.51zmt.top:8000/e.xml",
+    "https://epg.112114.xyz/pp.xml"
 ]
