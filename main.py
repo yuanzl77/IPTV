@@ -1,8 +1,11 @@
 import re
 import requests
+import logging
 from collections import OrderedDict
 from datetime import datetime
 import config
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("function.log", encoding="utf-8"), logging.StreamHandler()])
 
 def parse_template(template_file):
     template_channels = OrderedDict()
@@ -29,9 +32,10 @@ def fetch_channels(url):
         response.raise_for_status()
         response.encoding = 'utf-8'
         lines = response.text.split("\n")
-
         current_category = None
         is_m3u = any("#EXTINF" in line for line in lines[:15])
+        source_type = "m3u" if is_m3u else "txt"
+        logging.info(f"url: {url} 获取成功，判断为{source_type}格式")
 
         if is_m3u:
             for line in lines:
@@ -61,8 +65,11 @@ def fetch_channels(url):
                         channels[current_category].append((channel_name, channel_url))
                     elif line:
                         channels[current_category].append((line, ''))
+        if channels:
+            categories = ", ".join(channels.keys())
+            logging.info(f"url: 爬取成功，包含频道分类: {categories}")
     except requests.RequestException as e:
-        print(f"Failed to fetch channels from the URL: {url}, Error: {e}")
+        logging.error(f"Failed to fetch channels from the URL: {url}, Error: {e}")
 
     return channels
 
@@ -125,13 +132,12 @@ def updateChannelUrlsM3U(channels, template_channels):
                     for channel_name in channel_list:
                         if channel_name in channels[category]:
                             sorted_urls = sorted(channels[category][channel_name], key=lambda url: not is_ipv6(url) if config.ip_version_priority == "ipv6" else is_ipv6(url))
-                            line_number = 1
-                            for url in sorted_urls:
+                            for index, url in enumerate(sorted_urls, start=1):
                                 if url and url not in written_urls and not any(blacklist in url for blacklist in config.url_blacklist):
                                     if is_ipv6(url):
-                                        url_suffix = f"$LR•IPV6" if len(sorted_urls) == 1 else f"$LR•IPV6『线路{line_number}』"
+                                        url_suffix = f"$LR•IPV6" if len(sorted_urls) == 1 else f"$LR•IPV6『线路{index}』"
                                     else:
-                                        url_suffix = f"$LR•IPV4" if len(sorted_urls) == 1 else f"$LR•IPV4『线路{line_number}』"
+                                        url_suffix = f"$LR•IPV4" if len(sorted_urls) == 1 else f"$LR•IPV4『线路{index}』"
                                     if '$' in url:
                                         base_url = url.split('$', 1)[0]
                                     else:
@@ -139,11 +145,10 @@ def updateChannelUrlsM3U(channels, template_channels):
 
                                     new_url = f"{base_url}{url_suffix}"
 
-                                    f_m3u.write(f"#EXTINF:-1 tvg-id=\"{line_number}\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
+                                    f_m3u.write(f"#EXTINF:-1 tvg-id=\"{index}\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
                                     f_m3u.write(new_url + "\n")
                                     f_txt.write(f"{channel_name},{new_url}\n")
                                     written_urls.add(url)
-                                    line_number += 1
 
             f_txt.write("\n")
 
