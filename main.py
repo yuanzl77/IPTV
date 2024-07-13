@@ -67,7 +67,7 @@ def fetch_channels(url):
                         channels[current_category].append((line, ''))
         if channels:
             categories = ", ".join(channels.keys())
-            logging.info(f"url: 爬取成功，包含频道分类: {categories}")
+            logging.info(f"url: {url} 爬取成功，包含频道分类: {categories}")
     except requests.RequestException as e:
         logging.error(f"Failed to fetch channels from the URL: {url}, Error: {e}")
 
@@ -132,23 +132,28 @@ def updateChannelUrlsM3U(channels, template_channels):
                     for channel_name in channel_list:
                         if channel_name in channels[category]:
                             sorted_urls = sorted(channels[category][channel_name], key=lambda url: not is_ipv6(url) if config.ip_version_priority == "ipv6" else is_ipv6(url))
-                            for index, url in enumerate(sorted_urls, start=1):
+                            filtered_urls = []
+                            for url in sorted_urls:
                                 if url and url not in written_urls and not any(blacklist in url for blacklist in config.url_blacklist):
-                                    if is_ipv6(url):
-                                        url_suffix = f"$LR•IPV6" if len(sorted_urls) == 1 else f"$LR•IPV6『线路{index}』"
-                                    else:
-                                        url_suffix = f"$LR•IPV4" if len(sorted_urls) == 1 else f"$LR•IPV4『线路{index}』"
-                                    if '$' in url:
-                                        base_url = url.split('$', 1)[0]
-                                    else:
-                                        base_url = url
-
-                                    new_url = f"{base_url}{url_suffix}"
-
-                                    f_m3u.write(f"#EXTINF:-1 tvg-id=\"{index}\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
-                                    f_m3u.write(new_url + "\n")
-                                    f_txt.write(f"{channel_name},{new_url}\n")
+                                    filtered_urls.append(url)
                                     written_urls.add(url)
+
+                            total_urls = len(filtered_urls)
+                            for index, url in enumerate(filtered_urls, start=1):
+                                if is_ipv6(url):
+                                    url_suffix = f"$LR•IPV6" if total_urls == 1 else f"$LR•IPV6『线路{index}』"
+                                else:
+                                    url_suffix = f"$LR•IPV4" if total_urls == 1 else f"$LR•IPV4『线路{index}』"
+                                if '$' in url:
+                                    base_url = url.split('$', 1)[0]
+                                else:
+                                    base_url = url
+
+                                new_url = f"{base_url}{url_suffix}"
+
+                                f_m3u.write(f"#EXTINF:-1 tvg-id=\"{index}\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
+                                f_m3u.write(new_url + "\n")
+                                f_txt.write(f"{channel_name},{new_url}\n")
 
             f_txt.write("\n")
 
