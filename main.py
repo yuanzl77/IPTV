@@ -31,8 +31,9 @@ def fetch_channels(url):
         lines = response.text.split("\n")
 
         current_category = None
+        is_m3u = any("#EXTINF" in line for line in lines[:15])
 
-        if url.endswith(".m3u"):
+        if is_m3u:
             for line in lines:
                 line = line.strip()
                 if line.startswith("#EXTINF"):
@@ -102,19 +103,22 @@ def updateChannelUrlsM3U(channels, template_channels):
     written_urls = set()
 
     current_date = datetime.now().strftime("%Y-%m-%d")
+    for group in config.announcements:
+        for announcement in group['entries']:
+            if announcement['name'] is None:
+                announcement['name'] = current_date
 
     with open("live.m3u", "w", encoding="utf-8") as f_m3u:
-        f_m3u.write("""#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml","http://epg.51zmt.top:8000/difang.xml","https://epg.v1.mk/fy.xml","http://epg.51zmt.top:8000/e.xml","https://epg.112114.xyz/pp.xml"\n""")
-        f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="请阅读" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",请阅读\n""")
-        f_m3u.write("https://liuliuliu.tv/api/channels/1997/stream\n")
-        f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="yuanzl77.github.io" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",yuanzl77.github.io\n""")
-        f_m3u.write("https://liuliuliu.tv/api/channels/233/stream\n")
-        f_m3u.write("""#EXTINF:-1 tvg-id="1" tvg-name="更新日期" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",更新日期\n""")
-        f_m3u.write("https://gitlab.com/lr77/IPTV/-/raw/main/%E4%B8%BB%E8%A7%92.mp4\n")
-        f_m3u.write(f"""#EXTINF:-1 tvg-id="1" tvg-name="{current_date}" tvg-logo="http://175.178.251.183:6689/LR.jpg" group-title="公告",{current_date}\n""")
-        f_m3u.write("https://gitlab.com/lr77/IPTV/-/raw/main/%E8%B5%B7%E9%A3%8E%E4%BA%86.mp4\n")
+        f_m3u.write(f"""#EXTM3U x-tvg-url={",".join(f'"{epg_url}"' for epg_url in config.epg_urls)}\n""")
 
         with open("live.txt", "w", encoding="utf-8") as f_txt:
+            for group in config.announcements:
+                f_txt.write(f"{group['channel']},#genre#\n")
+                for announcement in group['entries']:
+                    f_m3u.write(f"""#EXTINF:-1 tvg-id="1" tvg-name="{announcement['name']}" tvg-logo="{announcement['logo']}" group-title="{group['channel']}",{announcement['name']}\n""")
+                    f_m3u.write(f"{announcement['url']}\n")
+                    f_txt.write(f"{announcement['name']},{announcement['url']}\n")
+
             for category, channel_list in template_channels.items():
                 f_txt.write(f"{category},#genre#\n")
                 if category in channels:
@@ -124,14 +128,17 @@ def updateChannelUrlsM3U(channels, template_channels):
                             line_number = 1
                             for url in sorted_urls:
                                 if url and url not in written_urls and not any(blacklist in url for blacklist in config.url_blacklist):
-                                    url_suffix = f"$LR•IPV6『线路{line_number}』" if is_ipv6(url) else f"$LR•IPV4『线路{line_number}』"
+                                    if is_ipv6(url):
+                                        url_suffix = f"$LR•IPV6" if len(sorted_urls) == 1 else f"$LR•IPV6『线路{line_number}』"
+                                    else:
+                                        url_suffix = f"$LR•IPV4" if len(sorted_urls) == 1 else f"$LR•IPV4『线路{line_number}』"
                                     if '$' in url:
                                         base_url = url.split('$', 1)[0]
                                     else:
                                         base_url = url
-                                    
+
                                     new_url = f"{base_url}{url_suffix}"
-                                    
+
                                     f_m3u.write(f"#EXTINF:-1 tvg-id=\"{line_number}\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gitee.com/yuanzl77/TVBox-logo/raw/main/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
                                     f_m3u.write(new_url + "\n")
                                     f_txt.write(f"{channel_name},{new_url}\n")
