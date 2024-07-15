@@ -15,10 +15,11 @@
 1. 更低的延迟: IPv6协议在一些方面能提供更低的延迟，这对于实时视频流的播放体验很重要，可以减少视频缓冲和加载时间。
 2. 更好的多媒体支持: IPv6为多媒体内容提供更好的支持，这包括更好的多播和组播支持，可以更有效地传输视频内容。
 3. 更好的质量和稳定性: 由于IPv6在设计上更加现代化和健壮，因此在传输视频内容时可能会提供更好的质量和稳定性，减少了因为地址转换等问题而导致的连接中断或者性能下降。
+   > 查看当前网络是否支持IPV6 [IP](https://ipw.cn)
 
-# 您的投喂是我更新的动力！
+# 感谢您的支持与打赏
 ![打赏图](https://gh.con.sh/https://raw.githubusercontent.com/yuanzl77/zafu/main/打赏码.png)
-**觉得不错的话，恳请您打赏助力一下！**
+**您的打赏不仅是对我的肯定，更是我前进的动力，感谢您的支持！**
 
 ## Star History
 [![Stargazers over time](https://starchart.cc/yuanzl77/IPTV.svg?variant=adaptive)](https://starchart.cc/yuanzl77/IPTV)
