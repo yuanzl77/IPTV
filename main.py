@@ -5,7 +5,7 @@ from collections import OrderedDict
 from datetime import datetime
 import config
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("function.log", encoding="utf-8"), logging.StreamHandler()])
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("function.log"，"w", encoding="utf-8"), logging.StreamHandler()])
 
 def parse_template(template_file):
     template_channels = OrderedDict()
@@ -67,9 +67,9 @@ def fetch_channels(url):
                         channels[current_category].append((line, ''))
         if channels:
             categories = ", ".join(channels.keys())
-            logging.info(f"url: {url} 爬取成功，包含频道分类: {categories}")
+            logging.info(f"url: {url} 爬取成功✅，包含频道分类: {categories}")
     except requests.RequestException as e:
-        logging.error(f"Failed to fetch channels from the URL: {url}, Error: {e}")
+        logging.error(f"url: {url} 爬取失败❌, Error: {e}")
 
     return channels
 
