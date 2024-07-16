@@ -1,40 +1,40 @@
-2024-07-16 10:45:52,879 - INFO - url: https://live.fanmingming.com/tv/m3u/ipv6.m3u 获取成功，判断为m3u格式
-2024-07-16 10:45:52,880 - INFO - url: https://live.fanmingming.com/tv/m3u/ipv6.m3u 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 数字频道, 上海频道, 浙江频道, 内蒙频道
-2024-07-16 10:45:52,948 - INFO - url: https://raw.githubusercontent.com/yuanzl77/IPTV/main/直播/央视频道.txt 获取成功，判断为txt格式
-2024-07-16 10:45:52,948 - INFO - url: https://raw.githubusercontent.com/yuanzl77/IPTV/main/直播/央视频道.txt 爬取成功✅，包含频道分类: 央视频道
-2024-07-16 10:45:54,431 - INFO - url: http://120.79.4.185/new/mdlive.txt 获取成功，判断为txt格式
-2024-07-16 10:45:54,443 - INFO - url: http://120.79.4.185/new/mdlive.txt 爬取成功✅，包含频道分类: 公告信息, 央卫频道, 央视频道, 卫视频道, 地方频道, 央视V6, 电影频道, 歪歪轮播, 虎牙轮播, 斗鱼轮播, 堆堆轮播, 愉快观影, 电影轮播, 童年回忆, 少儿, 音乐, 历年春晚
-2024-07-16 10:45:54,546 - INFO - url: https://raw.githubusercontent.com/Fairy8o/IPTV/main/PDX-V4.txt 获取成功，判断为txt格式
-2024-07-16 10:45:54,562 - INFO - url: https://raw.githubusercontent.com/Fairy8o/IPTV/main/PDX-V4.txt 爬取成功✅，包含频道分类: 👉扫码添加此微信👈, 👉以获取最新链接👈, 👉唯一微信号:Cxx114x👈, 👉定期更换新链接👈, 👉不加此微信无售后👈, 👉其他微信是假冒品！👈, 🏆欧洲杯决赛🏆, 🐉独家线路🐯, 🐉电信专线「多线路」, 🐉联通专线「多线路」, 🐉移动专线「多线路」, 🐉央视付费频道, 🐉特色频道, 🐉4K-8K频道, 🐉国内体育, 🐉海外体育, 🐉海外体育(电信专用), 🐉NBA-CBA「更新中」, 🐉咪咕视频-①🏆, 🐉咪咕视频-②🏆, 🐉香港频道「线路1」, 🐉香港频道「线路2」, 🐉香港频道「线路3」, 🐉湾湾频道「线路1」, 🐉湾湾频道「线路2」, 🐉湾湾频道「线路3」, 🐉四季湾湾, 🐉日本频道🦮, 🐉韩国频道🦆, 🐉美国频道🦅, 🐉英国频道🦁, 🐉电影频道🎥, 🐉游戏赛事🐸, 🐉埋堆堆🙉, 🐉斗鱼轮播🦈, 🐉虎牙轮播🐯, 🐉YY轮播🦞, 🐉经典电影🎞, 🐉经典电视剧📺, 🐉少儿频道👶🏻, 🐉北京频道, 🐉上海频道, 🐉广东频道, 🐉湖南频道, 🐉各地方频道, 🐉HBO&iHOT频道, 🐉SITV频道, 🐉NewTV频道, 🐉全国景区直播, 🐉纪录片频道, 🐉广播剧场🎙
-2024-07-16 10:45:54,662 - INFO - url: https://raw.githubusercontent.com/Fairy8o/IPTV/main/PDX-V6.txt 获取成功，判断为txt格式
-2024-07-16 10:45:54,677 - INFO - url: https://raw.githubusercontent.com/Fairy8o/IPTV/main/PDX-V6.txt 爬取成功✅，包含频道分类: 👉扫码添加此微信👈, 👉以获取最新链接👈, 👉唯一微信号:Cxx114x👈, 👉定期更换新链接👈, 👉不加此微信无售后👈, 👉其他微信是假冒品！👈, 🏆欧洲杯决赛🏆, 🐉央视频道🐉, 🐉卫视频道🐉, 🐉央视付费频道, 🐉求索&iHOT频道, 🐉4K-8K频道, 🐉数字高清, 🐉国内体育, 🐉海外体育, 🐉海外体育(电信专用), 🐉咪咕视频-①🏆, 🐉咪咕视频-②🥇, 🐉NBA-CBA「更新中」, 🐉香港频道「线路1」, 🐉香港频道「线路2」, 🐉香港频道「线路3」, 🐉湾湾频道「线路1」, 🐉湾湾频道「线路2」, 🐉湾湾频道「线路3」, 🐉四季湾湾, 🐉日本频道🦮, 🐉韩国频道🦆, 🐉美国频道🦅, 🐉英国频道🦁, 🐉电影频道🎥, 🐉游戏赛事🐸, 🐉埋堆堆🙉, 🐉斗鱼轮播🦈, 🐉虎牙轮播🐯, 🐉YY轮播🦞, 🐉经典电影🎞, 🐉经典电视剧📺, 🐉少儿频道👶🏻, 🐉北京频道, 🐉上海频道, 🐉广东频道, 🐉湖南频道, 🐉各地方频道, 🐉iHOT频道, 🐉SITV频道, 🐉NewTV频道, 🐉全国景区直播, 🐉纪录片频道, 🐉广播剧场🎙
-2024-07-16 10:45:54,974 - INFO - url: https://live.zhoujie218.top/tv/iptv6.txt 获取成功，判断为txt格式
-2024-07-16 10:45:54,975 - INFO - url: https://live.zhoujie218.top/tv/iptv6.txt 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 数字频道, 地方频道, 更新时间
-2024-07-16 10:45:57,112 - INFO - url: https://tv.youdu.fan:666/live/ 获取成功，判断为txt格式
-2024-07-16 10:45:57,130 - INFO - url: https://tv.youdu.fan:666/live/ 爬取成功✅，包含频道分类: 🌹防失联, 📡央卫频道, 📡央视频道, 📡卫视频道, 📡地方频道, 📡移动专区, 📡V6央视频道, 📡V6卫视频道, 📡儿童频道, 📡港湾频道, 📡历届春晚, 📡直播中国, 🌏国际频道, 💞电影频道, 💃丨MTV现代, 📛丨MTV怀旧, 📡测试
-2024-07-16 10:45:57,718 - INFO - url: https://fm1077.serv00.net/litv.txt 获取成功，判断为txt格式
-2024-07-16 10:45:57,719 - INFO - url: https://fm1077.serv00.net/litv.txt 爬取成功✅，包含频道分类: ﻿新闻频道, 影视频道, 体育频道, 综艺频道, 其他频道
-2024-07-16 10:45:57,866 - INFO - url: https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt 获取成功，判断为txt格式
-2024-07-16 10:45:57,867 - INFO - url: https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 湖南频道, 更新时间
-2024-07-16 10:45:58,000 - INFO - url: https://raw.githubusercontent.com/qingwen07/awesome-iptv/main/tvbox_live_all.txt 获取成功，判断为txt格式
-2024-07-16 10:45:58,021 - INFO - url: https://raw.githubusercontent.com/qingwen07/awesome-iptv/main/tvbox_live_all.txt 爬取成功✅，包含频道分类: 央视, 新闻, 卫视台, 地方台, 港澳台, 埋堆堆, 影视, 体育, 音乐, 小品, 咪咕, 斗鱼, 少儿, 国外, IPV6, 
-2024-07-16 10:45:59,582 - INFO - url: https://v.nxog.top/m/tv/1/ 获取成功，判断为m3u格式
-2024-07-16 10:45:59,586 - INFO - url: https://v.nxog.top/m/tv/1/ 爬取成功✅，包含频道分类: 欧歌分享, 央视IPv4, 卫视IPv4, 央视IPv6, 卫视IPv6, 数字高清, 湖南地区, 山西地区, 湖北地区, 浙江地区, 广东地区, 江苏地区, 河北地区, 山东地区, 北京地区, 陕西地区, 甘肃地区, 黑龙江地区, NewTV, 移动咪咕, 两岸三地, 直播中国, 韩国女团, 歌星金曲, MTV, DJ音乐, 演唱会
-2024-07-16 10:45:59,640 - INFO - url: https://raw.githubusercontent.com/Guovin/TV/gd/result.txt 获取成功，判断为txt格式
-2024-07-16 10:45:59,641 - INFO - url: https://raw.githubusercontent.com/Guovin/TV/gd/result.txt 爬取成功✅，包含频道分类: 广东频道, 央视频道, 卫视频道, 港·澳·台
-2024-07-16 10:46:00,914 - INFO - url: http://home.jundie.top:81/Cat/tv/live.txt 获取成功，判断为txt格式
-2024-07-16 10:46:00,918 - INFO - url: http://home.jundie.top:81/Cat/tv/live.txt 爬取成功✅，包含频道分类: 港•澳•台, 央视, 卫视, 肥羊高清春晚, 4K, 影视, 少儿, 体育, 埋堆堆, 虎牙, 斗鱼
-2024-07-16 10:46:00,997 - INFO - url: https://raw.githubusercontent.com/vbskycn/iptv/master/tv/hd.txt 获取成功，判断为txt格式
-2024-07-16 10:46:00,999 - INFO - url: https://raw.githubusercontent.com/vbskycn/iptv/master/tv/hd.txt 爬取成功✅，包含频道分类: ﻿央视频道jxH, 江西本地jxH, 卫视频道jxH, 体育频道jxH, 儿童频道jxH, 特色频道jxH, 央视频道ip6, 卫视频道ip6, 数字频道ip6, 地方频道ip6, 更新时间ip6, 央视频道ip4, 卫视频道ip4, 数字频道ip4, 少儿频道ip4, 地方频道ip4, 港·澳·台ip4, 更新时间ip4
-2024-07-16 10:46:01,029 - INFO - url: https://cdn.jsdelivr.net/gh/YueChan/live@main/IPTV.m3u 获取成功，判断为m3u格式
-2024-07-16 10:46:01,029 - INFO - url: https://cdn.jsdelivr.net/gh/YueChan/live@main/IPTV.m3u 爬取成功✅，包含频道分类: 央视, 卫视, 地方, 数字, 国际, 联通
-2024-07-16 10:46:01,090 - INFO - url: https://raw.githubusercontent.com/cymz6/AutoIPTV-Hotel/main/lives.txt 获取成功，判断为txt格式
-2024-07-16 10:46:01,091 - INFO - url: https://raw.githubusercontent.com/cymz6/AutoIPTV-Hotel/main/lives.txt 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 其他频道
-2024-07-16 10:46:01,171 - INFO - url: https://raw.githubusercontent.com/PizazzGY/TVBox_warehouse/main/live.txt 获取成功，判断为txt格式
-2024-07-16 10:46:01,177 - INFO - url: https://raw.githubusercontent.com/PizazzGY/TVBox_warehouse/main/live.txt 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 地方频道, 港·澳·台, 咪咕直播, 百视频道, 超高清频道, NewTV频道
-2024-07-16 10:46:01,963 - INFO - url: https://fm1077.serv00.net/SmartTV.m3u 获取成功，判断为m3u格式
-2024-07-16 10:46:01,964 - INFO - url: https://fm1077.serv00.net/SmartTV.m3u 爬取成功✅，包含频道分类: 臺灣 Taiwan, 馬來西亞 Malaysia, 新加坡 Singapore, 印尼 Indonesia, 香港 Hongkong, 中國 China, 體育 Sports, 印度 Indian, 電影 Movie, 紀錄 Documentary, 新聞 News, 兒童 Kids, 泰國 Thailand, 英國 United Kingdom, 越南 Vietnam, 韓國 Korea, 日本 Japan
-2024-07-16 10:46:01,975 - INFO - url: https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt 获取成功，判断为txt格式
-2024-07-16 10:46:01,976 - INFO - url: https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 其他频道
-2024-07-16 10:46:02,048 - INFO - url: https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt 获取成功，判断为txt格式
-2024-07-16 10:46:02,059 - INFO - url: https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt 爬取成功✅，包含频道分类: 更新时间, 上海频道, 央视频道, 卫视频道, 体育频道, 电影频道, 电视剧频道, 明星, 主题片, 港澳台, 国际台, 纪录片, 动画片, 戏曲频道, 解说频道, 综艺频道, 音乐频道, 游戏频道, 浙江频道, 江苏频道, 湖南频道, 湖北频道, 安徽频道, 广东频道, 海南频道, 内蒙频道, 辽宁频道, 陕西频道, 山西频道, 山东频道, 云南频道, 春晚, 收音机频道
+2024-07-17 05:47:50,194 - INFO - url: https://live.fanmingming.com/tv/m3u/ipv6.m3u 获取成功，判断为m3u格式
+2024-07-17 05:47:50,194 - INFO - url: https://live.fanmingming.com/tv/m3u/ipv6.m3u 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 数字频道, 上海频道, 浙江频道, 内蒙频道
+2024-07-17 05:47:50,349 - INFO - url: https://raw.githubusercontent.com/yuanzl77/IPTV/main/直播/央视频道.txt 获取成功，判断为txt格式
+2024-07-17 05:47:50,350 - INFO - url: https://raw.githubusercontent.com/yuanzl77/IPTV/main/直播/央视频道.txt 爬取成功✅，包含频道分类: 央视频道
+2024-07-17 05:47:51,527 - INFO - url: http://120.79.4.185/new/mdlive.txt 获取成功，判断为txt格式
+2024-07-17 05:47:51,539 - INFO - url: http://120.79.4.185/new/mdlive.txt 爬取成功✅，包含频道分类: 公告信息, 央卫频道, 央视频道, 卫视频道, 地方频道, 央视V6, 电影频道, 歪歪轮播, 虎牙轮播, 斗鱼轮播, 堆堆轮播, 愉快观影, 电影轮播, 童年回忆, 少儿, 音乐, 历年春晚
+2024-07-17 05:47:51,870 - INFO - url: https://raw.githubusercontent.com/Fairy8o/IPTV/main/PDX-V4.txt 获取成功，判断为txt格式
+2024-07-17 05:47:51,886 - INFO - url: https://raw.githubusercontent.com/Fairy8o/IPTV/main/PDX-V4.txt 爬取成功✅，包含频道分类: 👉扫码添加此微信👈, 👉以获取最新链接👈, 👉唯一微信号:Cxx114x👈, 👉定期更换新链接👈, 👉不加此微信无售后👈, 👉其他微信是假冒品！👈, 🏆欧洲杯决赛🏆, 🐉独家线路🐯, 🐉电信专线「多线路」, 🐉联通专线「多线路」, 🐉移动专线「多线路」, 🐉央视付费频道, 🐉特色频道, 🐉4K-8K频道, 🐉国内体育, 🐉海外体育, 🐉海外体育(电信专用), 🐉NBA-CBA「更新中」, 🐉咪咕视频-①🏆, 🐉咪咕视频-②🏆, 🐉香港频道「线路1」, 🐉香港频道「线路2」, 🐉香港频道「线路3」, 🐉湾湾频道「线路1」, 🐉湾湾频道「线路2」, 🐉湾湾频道「线路3」, 🐉四季湾湾, 🐉日本频道🦮, 🐉韩国频道🦆, 🐉美国频道🦅, 🐉英国频道🦁, 🐉电影频道🎥, 🐉游戏赛事🐸, 🐉埋堆堆🙉, 🐉斗鱼轮播🦈, 🐉虎牙轮播🐯, 🐉YY轮播🦞, 🐉经典电影🎞, 🐉经典电视剧📺, 🐉少儿频道👶🏻, 🐉北京频道, 🐉上海频道, 🐉广东频道, 🐉湖南频道, 🐉各地方频道, 🐉HBO&iHOT频道, 🐉SITV频道, 🐉NewTV频道, 🐉全国景区直播, 🐉纪录片频道, 🐉广播剧场🎙
+2024-07-17 05:47:52,044 - INFO - url: https://raw.githubusercontent.com/Fairy8o/IPTV/main/PDX-V6.txt 获取成功，判断为txt格式
+2024-07-17 05:47:52,059 - INFO - url: https://raw.githubusercontent.com/Fairy8o/IPTV/main/PDX-V6.txt 爬取成功✅，包含频道分类: 👉扫码添加此微信👈, 👉以获取最新链接👈, 👉唯一微信号:Cxx114x👈, 👉定期更换新链接👈, 👉不加此微信无售后👈, 👉其他微信是假冒品！👈, 🏆欧洲杯决赛🏆, 🐉央视频道🐉, 🐉卫视频道🐉, 🐉央视付费频道, 🐉求索&iHOT频道, 🐉4K-8K频道, 🐉数字高清, 🐉国内体育, 🐉海外体育, 🐉海外体育(电信专用), 🐉咪咕视频-①🏆, 🐉咪咕视频-②🥇, 🐉NBA-CBA「更新中」, 🐉香港频道「线路1」, 🐉香港频道「线路2」, 🐉香港频道「线路3」, 🐉湾湾频道「线路1」, 🐉湾湾频道「线路2」, 🐉湾湾频道「线路3」, 🐉四季湾湾, 🐉日本频道🦮, 🐉韩国频道🦆, 🐉美国频道🦅, 🐉英国频道🦁, 🐉电影频道🎥, 🐉游戏赛事🐸, 🐉埋堆堆🙉, 🐉斗鱼轮播🦈, 🐉虎牙轮播🐯, 🐉YY轮播🦞, 🐉经典电影🎞, 🐉经典电视剧📺, 🐉少儿频道👶🏻, 🐉北京频道, 🐉上海频道, 🐉广东频道, 🐉湖南频道, 🐉各地方频道, 🐉iHOT频道, 🐉SITV频道, 🐉NewTV频道, 🐉全国景区直播, 🐉纪录片频道, 🐉广播剧场🎙
+2024-07-17 05:47:52,390 - INFO - url: https://live.zhoujie218.top/tv/iptv6.txt 获取成功，判断为txt格式
+2024-07-17 05:47:52,392 - INFO - url: https://live.zhoujie218.top/tv/iptv6.txt 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 数字频道, 地方频道, 更新时间
+2024-07-17 05:47:54,508 - INFO - url: https://tv.youdu.fan:666/live/ 获取成功，判断为txt格式
+2024-07-17 05:47:54,524 - INFO - url: https://tv.youdu.fan:666/live/ 爬取成功✅，包含频道分类: 🌹防失联, 📡央卫频道, 📡央视频道, 📡卫视频道, 📡地方频道, 📡移动专区, 📡V6央视频道, 📡V6卫视频道, 📡儿童频道, 📡港湾频道, 📡历届春晚, 📡直播中国, 🌏国际频道, 💞电影频道, 💃丨MTV现代, 📛丨MTV怀旧, 📡测试
+2024-07-17 05:47:55,555 - INFO - url: https://fm1077.serv00.net/litv.txt 获取成功，判断为txt格式
+2024-07-17 05:47:55,556 - INFO - url: https://fm1077.serv00.net/litv.txt 爬取成功✅，包含频道分类: ﻿新闻频道, 影视频道, 体育频道, 综艺频道, 其他频道
+2024-07-17 05:47:55,776 - INFO - url: https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt 获取成功，判断为txt格式
+2024-07-17 05:47:55,777 - INFO - url: https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 湖南频道, 更新时间
+2024-07-17 05:47:56,073 - INFO - url: https://raw.githubusercontent.com/qingwen07/awesome-iptv/main/tvbox_live_all.txt 获取成功，判断为txt格式
+2024-07-17 05:47:56,094 - INFO - url: https://raw.githubusercontent.com/qingwen07/awesome-iptv/main/tvbox_live_all.txt 爬取成功✅，包含频道分类: 央视, 新闻, 卫视台, 地方台, 港澳台, 埋堆堆, 影视, 体育, 音乐, 小品, 咪咕, 斗鱼, 少儿, 国外, IPV6, 
+2024-07-17 05:47:57,885 - INFO - url: https://v.nxog.top/m/tv/1/ 获取成功，判断为m3u格式
+2024-07-17 05:47:57,889 - INFO - url: https://v.nxog.top/m/tv/1/ 爬取成功✅，包含频道分类: 欧歌分享, 央视IPv4, 卫视IPv4, 央视IPv6, 卫视IPv6, 数字高清, 湖南地区, 山西地区, 湖北地区, 浙江地区, 广东地区, 江苏地区, 河北地区, 山东地区, 北京地区, 陕西地区, 甘肃地区, 黑龙江地区, NewTV, 移动咪咕, 两岸三地, 直播中国, 韩国女团, 歌星金曲, MTV, DJ音乐, 演唱会
+2024-07-17 05:47:58,116 - INFO - url: https://raw.githubusercontent.com/Guovin/TV/gd/result.txt 获取成功，判断为txt格式
+2024-07-17 05:47:58,119 - INFO - url: https://raw.githubusercontent.com/Guovin/TV/gd/result.txt 爬取成功✅，包含频道分类: 广东频道, 央视频道, 卫视频道, 港·澳·台
+2024-07-17 05:47:59,288 - INFO - url: http://home.jundie.top:81/Cat/tv/live.txt 获取成功，判断为txt格式
+2024-07-17 05:47:59,293 - INFO - url: http://home.jundie.top:81/Cat/tv/live.txt 爬取成功✅，包含频道分类: 港•澳•台, 央视, 卫视, 肥羊高清春晚, 4K, 影视, 少儿, 体育, 埋堆堆, 虎牙, 斗鱼
+2024-07-17 05:47:59,547 - INFO - url: https://raw.githubusercontent.com/vbskycn/iptv/master/tv/hd.txt 获取成功，判断为txt格式
+2024-07-17 05:47:59,548 - INFO - url: https://raw.githubusercontent.com/vbskycn/iptv/master/tv/hd.txt 爬取成功✅，包含频道分类: ﻿央视频道jxH, 江西本地jxH, 卫视频道jxH, 体育频道jxH, 儿童频道jxH, 特色频道jxH, 央视频道ip6, 卫视频道ip6, 数字频道ip6, 地方频道ip6, 更新时间ip6, 央视频道ip4, 卫视频道ip4, 数字频道ip4, 地方频道ip4, 港·澳·台ip4, 更新时间ip4
+2024-07-17 05:47:59,654 - INFO - url: https://cdn.jsdelivr.net/gh/YueChan/live@main/IPTV.m3u 获取成功，判断为m3u格式
+2024-07-17 05:47:59,655 - INFO - url: https://cdn.jsdelivr.net/gh/YueChan/live@main/IPTV.m3u 爬取成功✅，包含频道分类: 央视, 卫视, 地方, 数字, 国际, 联通
+2024-07-17 05:47:59,781 - INFO - url: https://raw.githubusercontent.com/cymz6/AutoIPTV-Hotel/main/lives.txt 获取成功，判断为txt格式
+2024-07-17 05:47:59,782 - INFO - url: https://raw.githubusercontent.com/cymz6/AutoIPTV-Hotel/main/lives.txt 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 其他频道
+2024-07-17 05:47:59,955 - INFO - url: https://raw.githubusercontent.com/PizazzGY/TVBox_warehouse/main/live.txt 获取成功，判断为txt格式
+2024-07-17 05:47:59,961 - INFO - url: https://raw.githubusercontent.com/PizazzGY/TVBox_warehouse/main/live.txt 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 地方频道, 港·澳·台, 咪咕直播, 百视频道, 超高清频道, NewTV频道
+2024-07-17 05:48:00,789 - INFO - url: https://fm1077.serv00.net/SmartTV.m3u 获取成功，判断为m3u格式
+2024-07-17 05:48:00,791 - INFO - url: https://fm1077.serv00.net/SmartTV.m3u 爬取成功✅，包含频道分类: 臺灣 Taiwan, 馬來西亞 Malaysia, 新加坡 Singapore, 印尼 Indonesia, 香港 Hongkong, 中國 China, 體育 Sports, 印度 Indian, 電影 Movie, 紀錄 Documentary, 新聞 News, 兒童 Kids, 泰國 Thailand, 英國 United Kingdom, 越南 Vietnam, 韓國 Korea, 日本 Japan
+2024-07-17 05:48:00,999 - INFO - url: https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt 获取成功，判断为txt格式
+2024-07-17 05:48:01,000 - INFO - url: https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt 爬取成功✅，包含频道分类: 央视频道, 卫视频道, 其他频道
+2024-07-17 05:48:01,170 - INFO - url: https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt 获取成功，判断为txt格式
+2024-07-17 05:48:01,180 - INFO - url: https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt 爬取成功✅，包含频道分类: 更新时间, 上海频道, 央视频道, 卫视频道, 体育频道, 电影频道, 电视剧频道, 明星, 主题片, 港澳台, 国际台, 纪录片, 动画片, 戏曲频道, 解说频道, 综艺频道, 音乐频道, 游戏频道, 浙江频道, 江苏频道, 湖南频道, 湖北频道, 安徽频道, 广东频道, 海南频道, 内蒙频道, 辽宁频道, 陕西频道, 山西频道, 山东频道, 云南频道, 春晚, 收音机频道
