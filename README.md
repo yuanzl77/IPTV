@@ -11,6 +11,11 @@
 - 仓库文件加速 [线路1](https://gh.con.sh/https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.m3u)
 - 仓库文件加速 [线路2](https://cdn.jsdelivr.net/gh/yuanzl77/IPTV@latest/live.m3u)
 
+#
+![image](/image/Screenshot_2024-07-24-21-17-42-164_com.fongmi.android.tv.jpg)
+![image](/image/Screenshot_2024-07-24-21-20-39-458_com.github.tvbox.osc.tk.jpg)
+[video](https://youtu.be/HMjiSJHXD8Y?si=yb8FuoG9mR2aLoQW)
+
 ## IPV6优势
 1. 更低的延迟: IPv6协议在一些方面能提供更低的延迟，这对于实时视频流的播放体验很重要，可以减少视频缓冲和加载时间。
 2. 更好的多媒体支持: IPv6为多媒体内容提供更好的支持，这包括更好的多播和组播支持，可以更有效地传输视频内容。
