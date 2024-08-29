@@ -12,7 +12,6 @@
 - 仓库文件加速 [线路2](https://cdn.jsdelivr.net/gh/yuanzl77/IPTV@latest/live.m3u)
 
 #
-![image](/image/Screenshot_2024-07-24-21-17-42-164_com.fongmi.android.tv.jpg)
 ![image](/image/Screenshot_2024-07-24-21-20-39-458_com.github.tvbox.osc.tk.jpg)
 [video](https://youtu.be/HMjiSJHXD8Y?si=yb8FuoG9mR2aLoQW)
 
