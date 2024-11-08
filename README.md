@@ -22,7 +22,7 @@
    > 查看当前网络是否支持IPV6 [IP](https://ipw.cn)
 
 # 感谢您的支持与打赏
-![打赏图](https://gh.con.sh/https://raw.githubusercontent.com/yuanzl77/zafu/main/打赏码.png)
+![打赏图](https://raw.githubusercontent.com/yuanzl77/zafu/main/打赏码.png)
 **您的打赏不仅是对我的肯定，更是我前进的动力，感谢您的支持！**
 
 ## Star History
