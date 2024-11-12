@@ -51,9 +51,8 @@ url_blacklist = [
 
 announcements = [
     {
-        "channel": "公告",
+        "channel": "更新日期",
         "entries": [
-            {"name": "更新日期"},
             {"name": None, "url": "https://gitlab.com/lr77/IPTV/-/raw/main/%E8%B5%B7%E9%A3%8E%E4%BA%86.mp4", "logo": "http://175.178.251.183:6689/LR.jpg"}
         ]
     }
