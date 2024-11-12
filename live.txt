@@ -1,5 +1,4 @@
-公告,#genre#
-更新日期,https://gitlab.com/lr77/IPTV/-/raw/main/%E4%B8%BB%E8%A7%92.mp4
+更新日期,#genre#
 2024-11-12,https://gitlab.com/lr77/IPTV/-/raw/main/%E8%B5%B7%E9%A3%8E%E4%BA%86.mp4
 💮央视频道,#genre#
 CCTV1,http://[2409:8087:5e00:24::1e]:6060/000000001000/5000000010000030810/1.m3u8$LR•IPV6『线路1』
