@@ -2,7 +2,7 @@ name: Daily Update
 
 on:
   schedule:
-    - cron: '45 21 * * *'
+    - cron: '0 */6 * * *'  # 每隔6小时执行一次
   workflow_dispatch:
     branches:
       - main
