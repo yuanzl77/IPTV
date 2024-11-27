@@ -29,7 +29,7 @@ source_urls = [
     "http://live.nctv.top/x.txt",
     "http://www.lyyytv.cn/yt/zhibo/1.txt",
     "https://tv.iill.top/m3u/Live",
-    "http://tipu.xjqxz.top/live1213.txt"
+    "http://tipu.xjqxz.top/live1213.txt",
 ]
 
 url_blacklist = [
