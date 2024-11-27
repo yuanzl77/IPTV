@@ -22,15 +22,15 @@ source_urls = [
     "https://raw.githubusercontent.com/PizazzGY/TVBox_warehouse/main/live.txt",
     "https://fm1077.serv00.net/SmartTV.m3u",
     "https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt",
-    "https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt".
+    "https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt",
     "https://ghp.ci/raw.githubusercontent.com/MemoryCollection/IPTV/refs/heads/main/itvlist.m3u",
     "https://github.moeyy.xyz/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/huyayqk.m3u",
     "http://www.lyyytv.cn/yt/zhibo/1.txt",
     "http://live.nctv.top/x.txt",
     "http://www.lyyytv.cn/yt/zhibo/1.txt",
     "https://tv.iill.top/m3u/Live",
-    "http://tipu.xjqxz.top/live1213.txt",
-]
+    "http://tipu.xjqxz.top/live1213.txt"
+]  # Added closing bracket here
 
 url_blacklist = [
     "epg.pw/stream/",
