@@ -110,21 +110,13 @@ def updateChannelUrlsM3U(channels, template_channels):
     written_urls = set()
 
     current_date = datetime.now().strftime("%Y-%m-%d")
-    for group in config.announcements:
-        for announcement in group['entries']:
-            if announcement['name'] is None:
-                announcement['name'] = current_date
+    
 
     with open("live.m3u", "w", encoding="utf-8") as f_m3u:
         f_m3u.write(f"""#EXTM3U x-tvg-url={",".join(f'"{epg_url}"' for epg_url in config.epg_urls)}\n""")
 
         with open("live.txt", "w", encoding="utf-8") as f_txt:
-            for group in config.announcements:
-                f_txt.write(f"{group['channel']},#genre#\n")
-                for announcement in group['entries']:
-                    f_m3u.write(f"""#EXTINF:-1 tvg-id="1" tvg-name="{announcement['name']}" tvg-logo="{announcement['logo']}" group-title="{group['channel']}",{announcement['name']}\n""")
-                    f_m3u.write(f"{announcement['url']}\n")
-                    f_txt.write(f"{announcement['name']},{announcement['url']}\n")
+            
 
             for category, channel_list in template_channels.items():
                 f_txt.write(f"{category},#genre#\n")
