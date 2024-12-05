@@ -24,6 +24,15 @@ def parse_template(template_file):
 
     return template_channels
 
+# 频道数据清洗函数
+def clean_channel_name(channel_name):
+    # 使用正则表达式去掉非字母数字字符，但保留频道数字部分
+    cleaned_name = re.sub(r'[$$「」]', '', channel_name)  # 去掉中括号和「」字符
+    cleaned_name = re.sub(r'\s+', '', cleaned_name)  # 去掉所有空白字符
+    cleaned_name = re.sub(r'[^a-zA-Z0-9]', '', cleaned_name)  # 只保留字母和数字
+    cleaned_name = re.sub(r'(\d+).*', r'\1', cleaned_name)  # 仅保留数字前的部分
+    return cleaned_name.upper()  # 转换为大写
+
 def fetch_channels(url):
     channels = OrderedDict()
 
@@ -45,6 +54,13 @@ def fetch_channels(url):
                     if match:
                         current_category = match.group(1).strip()
                         channel_name = match.group(2).strip()
+                        if channel_name:  # 判断频道名称是否存在
+                            if channel_name.startswith("CCTV"):  # 判断频道名称是否以CCTV开头
+                                try:
+                                    channel_name = clean_channel_name(channel_name)  # 频道名称数据清洗
+                                except Exception as e:
+                                    logging.error(f"频道名称清洗失败，对应频道: {channel_name}, 错误: {e}")
+
                         if current_category not in channels:
                             channels[current_category] = []
                 elif line and not line.startswith("#"):
@@ -110,13 +126,21 @@ def updateChannelUrlsM3U(channels, template_channels):
     written_urls = set()
 
     current_date = datetime.now().strftime("%Y-%m-%d")
-    
+   # for group in config.announcements:
+    #    for announcement in group['entries']:
+    #        if announcement['name'] is None:
+      #          announcement['name'] = current_date
 
     with open("live.m3u", "w", encoding="utf-8") as f_m3u:
         f_m3u.write(f"""#EXTM3U x-tvg-url={",".join(f'"{epg_url}"' for epg_url in config.epg_urls)}\n""")
 
         with open("live.txt", "w", encoding="utf-8") as f_txt:
-            
+           # for group in config.announcements:
+            #    f_txt.write(f"{group['channel']},#genre#\n")
+              #  for announcement in group['entries']:
+               #     f_m3u.write(f"""#EXTINF:-1 tvg-id="1" tvg-name="{announcement['name']}" tvg-logo="{announcement['logo']}" group-title="{group['channel']}",{announcement['name']}\n""")
+               #     f_m3u.write(f"{announcement['url']}\n")
+               #     f_txt.write(f"{announcement['name']},{announcement['url']}\n")
 
             for category, channel_list in template_channels.items():
                 f_txt.write(f"{category},#genre#\n")
