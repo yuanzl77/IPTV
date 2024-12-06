@@ -30,7 +30,7 @@ def clean_channel_name(channel_name):
     cleaned_name = re.sub(r'[$「」-]', '', channel_name)  # 去掉中括号、«», 和'-'字符
     cleaned_name = re.sub(r'\s+', '', cleaned_name)  # 去掉所有空白字符
     cleaned_name = re.sub(r'[^a-zA-Z0-9]', '', cleaned_name)  # 只保留字母和数字
-    cleaned_name = re.sub(r'(\d+).*', r'\1', cleaned_name)  # 仅保留数字前的部分
+    cleaned_name = re.sub(r'(\D*)(\d+)', lambda m: m.group(1) + str(int(m.group(2))), cleaned_name)  # 将数字前面的部分保留，数字转换为整数
     return cleaned_name.upper()  # 转换为大写
 
 def fetch_channels(url):
@@ -82,8 +82,8 @@ def fetch_channels(url):
                         for channel_url in channel_urls:
                             channel_url = channel_url.strip()  # 去掉前后空白
                             channels[current_category].append((channel_name, channel_url))
-                elif line:
-                    channels[current_category].append((line, ''))
+                    elif line:
+                        channels[current_category].append((line, ''))
         if channels:
             categories = ", ".join(channels.keys())
             logging.info(f"url: {url} 爬取成功✅，包含频道分类: {categories}")
