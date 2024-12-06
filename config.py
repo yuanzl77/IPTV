@@ -19,7 +19,6 @@ source_urls = [
     "https://raw.githubusercontent.com/qingwen07/awesome-iptv/main/tvbox_live_all.txt",
     "https://live.zhoujie218.top/tv/iptv6.m3u",
     "https://live.zhoujie218.top/tv/iptv4.m3u",
-    "http://aktv.top/live.m3u",
     "https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u",
     "https://tv.iill.top/m3u/Gather",
     "https://raw.githubusercontent.com/YueChan/Live/refs/heads/main/APTV.m3ut"
