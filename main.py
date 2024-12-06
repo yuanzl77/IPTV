@@ -27,12 +27,11 @@ def parse_template(template_file):
 # 数据清洗函数
 def clean_channel_name(channel_name):
     # 使用正则表达式去掉非字母数字字符，但保留频道数字部分
-    cleaned_name = re.sub(r'[$「」-]', '', channel_name)  # 去掉中括号、«」和-字符
+    cleaned_name = re.sub(r'[$「」-]', '', channel_name)  # 去掉中括号、«», 和'-'字符
     cleaned_name = re.sub(r'\s+', '', cleaned_name)  # 去掉所有空白字符
     cleaned_name = re.sub(r'[^a-zA-Z0-9]', '', cleaned_name)  # 只保留字母和数字
     cleaned_name = re.sub(r'(\d+).*', r'\1', cleaned_name)  # 仅保留数字前的部分
     return cleaned_name.upper()  # 转换为大写
-
 
 def fetch_channels(url):
     channels = OrderedDict()
@@ -76,10 +75,15 @@ def fetch_channels(url):
                         channel_name = match.group(1).strip()
                         if channel_name and channel_name.startswith("CCTV"):  # 判断频道名称是否存在且以CCTV开头
                             channel_name = clean_channel_name(channel_name)  # 频道名称数据清洗
-                        channel_url = match.group(2).strip()
-                        channels[current_category].append((channel_name, channel_url))
-                    elif line:
-                        channels[current_category].append((line, ''))
+                        # 提取频道URL，并分割成多个部分
+                        channel_urls = match.group(2).strip().split('#')
+                
+                        # 存储每个分割出的URL
+                        for channel_url in channel_urls:
+                            channel_url = channel_url.strip()  # 去掉前后空白
+                            channels[current_category].append((channel_name, channel_url))
+                elif line:
+                    channels[current_category].append((line, ''))
         if channels:
             categories = ", ".join(channels.keys())
             logging.info(f"url: {url} 爬取成功✅，包含频道分类: {categories}")
