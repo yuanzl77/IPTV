@@ -15,7 +15,20 @@ source_urls = [
     "https://raw.githubusercontent.com/vbskycn/iptv/master/tv/hd.txt",
     "https://cdn.jsdelivr.net/gh/YueChan/live@main/IPTV.m3u",
     "https://fm1077.serv00.net/SmartTV.m3u",
-    #"https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt"
+    "https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt"
+    "https://raw.githubusercontent.com/qingwen07/awesome-iptv/main/tvbox_live_all.txt",
+    "https://live.zhoujie218.top/tv/iptv6.m3u",
+    "https://live.zhoujie218.top/tv/iptv4.m3u",
+    "http://aktv.top/live.m3u",
+    "https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u",
+    "https://tv.iill.top/m3u/Gather",
+    "https://raw.githubusercontent.com/YueChan/Live/refs/heads/main/APTV.m3ut"
+    "https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u",
+    "https://raw.githubusercontent.com/BurningC4/Chinese-IPTV/master/TV-IPV4.m3u",
+    "https://raw.githubusercontent.com/joevess/IPTV/main/m3u/iptv.m3u",
+    "http://tot.totalh.net/tttt.txt"
+    "https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/IPV6.m3u"
+    
 ]
 
 url_blacklist = [
