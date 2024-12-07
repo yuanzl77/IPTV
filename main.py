@@ -29,7 +29,7 @@ def clean_channel_name(channel_name):
     # 使用正则表达式去掉非字母数字字符，但保留频道数字部分
     cleaned_name = re.sub(r'[$「」-]', '', channel_name)  # 去掉中括号、«», 和'-'字符
     cleaned_name = re.sub(r'\s+', '', cleaned_name)  # 去掉所有空白字符
-    cleaned_name = re.sub(r'[^a-zA-Z0-9]', '', cleaned_name)  # 只保留字母和数字
+  #  cleaned_name = re.sub(r'[^a-zA-Z0-9]', '', cleaned_name)  # 只保留字母和数字
     cleaned_name = re.sub(r'(\D*)(\d+)', lambda m: m.group(1) + str(int(m.group(2))), cleaned_name)  # 将数字前面的部分保留，数字转换为整数
     return cleaned_name.upper()  # 转换为大写
 
