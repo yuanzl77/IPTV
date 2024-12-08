@@ -27,6 +27,8 @@ source_urls = [
     "https://raw.githubusercontent.com/joevess/IPTV/main/m3u/iptv.m3u",
     "http://tot.totalh.net/tttt.txt",
     "https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/IPV6.m3u",
+    "https://github.com/YanG-1989/m3u/blob/main/Gather.m3u",
+   
    
     
 ]
