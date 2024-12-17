@@ -16,7 +16,7 @@ source_urls = [
     "https://cdn.jsdelivr.net/gh/YueChan/live@main/IPTV.m3u",
     "https://fm1077.serv00.net/SmartTV.m3u",
     "https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt",
-    #"https://raw.githubusercontent.com/qingwen07/awesome-iptv/main/tvbox_live_all.txt",
+    "https://github.com/SPX372928/MyIPTV/blob/master/%E9%BB%91%E9%BE%99%E6%B1%9FPLTV%E7%A7%BB%E5%8A%A8CDN%E7%89%88.txt",
     "https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u",
     "https://tv.iill.top/m3u/Gather",
     "https://raw.githubusercontent.com/YueChan/Live/refs/heads/main/APTV.m3ut"
