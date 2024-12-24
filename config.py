@@ -26,7 +26,22 @@ source_urls = [
     "http://tot.totalh.net/tttt.txt",
     "https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/IPV6.m3u",
     "https://github.com/YanG-1989/m3u/blob/main/Gather.m3u",
-   
+    "https://iptv.b2og.com/txt/fmml_ipv6.txt",
+    "https://ghgo.xyz/raw.githubusercontent.com/suxuang/myIPTV/main/ipv6.m3u",
+    "https://live.zbds.top/tv/iptv6.txt",
+    "https://live.zbds.top/tv/iptv4.txt",
+    "https://live.fanmingming.com/tv/m3u/ipv6.m3u",
+    "https://ghgo.xyz/raw.githubusercontent.com/joevess/IPTV/main/home.m3u8",
+    "https://aktv.top/live.txt",
+    "http://175.178.251.183:6689/live.txt",
+    "https://ghgo.xyz/raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt",
+    "https://m3u.ibert.me/txt/fmml_dv6.txt",
+    "https://m3u.ibert.me/txt/o_cn.txt",
+    "https://m3u.ibert.me/txt/j_iptv.txt",
+    "https://ghgo.xyz/raw.githubusercontent.com/xzw832/cmys/main/S_CCTV.txt",
+    "https://ghgo.xyz/raw.githubusercontent.com/xzw832/cmys/main/S_weishi.txt",
+    "https://ghgo.xyz/raw.githubusercontent.com/asdjkl6/tv/tv/.m3u/整套直播源/测试/整套直播源/l.txt",
+    "https://ghgo.xyz/raw.githubusercontent.com/asdjkl6/tv/tv/.m3u/整套直播源/测试/整套直播源/kk.txt",
    
     
 ]
