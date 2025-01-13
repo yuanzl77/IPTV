@@ -4,7 +4,7 @@ source_urls = [
    "https://live.fanmingming.com/tv/m3u/ipv6.m3u",
    # "https://raw.githubusercontent.com/dengmeiqing/iptv/refs/heads/main/ipv4.txt",
     "https://live.zhoujie218.top/tv/iptv6.txt",
-   # "https://live.zhoujie218.top/tv/iptv4.txt",
+    "https://livetv.wqwqwq.sbs/tv.m3u",
     "https://www.mytvsuper.xyz/m3u/Live.m3u",
     "https://tv.youdu.fan:666/live/",
     "http://ww.weidonglong.com/dsj.txt",
@@ -42,6 +42,10 @@ source_urls = [
     "https://ghgo.xyz/raw.githubusercontent.com/xzw832/cmys/main/S_weishi.txt",
     "https://ghgo.xyz/raw.githubusercontent.com/asdjkl6/tv/tv/.m3u/整套直播源/测试/整套直播源/l.txt",
     "https://ghgo.xyz/raw.githubusercontent.com/asdjkl6/tv/tv/.m3u/整套直播源/测试/整套直播源/kk.txt",
+    "https://tvv.wqwqwq.sbs/iptv.m3u",
+    "https://tv.iill.top/m3u/Live",
+    #"https://ghgo.xyz/raw.githubusercontent.com/asdjkl6/tv/tv/.m3u/整套直播源/测试/整套直播源/l.txt",
+    #"https://ghgo.xyz/raw.githubusercontent.com/asdjkl6/tv/tv/.m3u/整套直播源/测试/整套直播源/kk.txt",
    
     
 ]
