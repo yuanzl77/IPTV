@@ -15618,9 +15618,8 @@ CHC家庭影院,http://223.145.224.216:8000/udp/239.76.245.241:1234$LR•IPV4『
 淘电影,https://stream1.freetv.fun/tao-dian-ying-2.m3u8$LR•IPV4『线路17』
 淘电影,https://stream1.freetv.fun/tao-dian-ying-3.ctv$LR•IPV4『线路18』
 淘电影,http://imzbpfrp.zzmd.fun:8888/udp/239.3.1.250:8001$LR•IPV4『线路19』
-淘电影,rtp://239.3.1.250:8001$LR•IPV4『线路20』
-淘电影,http://123.121.8.175:4000/udp/239.3.1.250:8001$LR•IPV4『线路21』
-淘电影,http://111.193.203.66:54022/udp/239.3.1.250:8001$LR•IPV4『线路22』
+淘电影,http://123.121.8.175:4000/udp/239.3.1.250:8001$LR•IPV4『线路20』
+淘电影,http://111.193.203.66:54022/udp/239.3.1.250:8001$LR•IPV4『线路21』
 AMC电影,http://61.221.215.25:8800/hls/43/index.m3u8$LR•IPV4『线路1』
 AMC电影,http://122.117.71.103:8559/http/61.222.53.250:8092/upload/115/AMC_TS-1111_1.m3u8$LR•IPV4『线路2』
 AMC电影,http://104.244.79.187:5050/litv/4gtv-4gtv017$LR•IPV4『线路3』
