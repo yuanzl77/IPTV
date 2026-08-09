@@ -1,7 +1,8 @@
 ip_version_priority = "ipv6"
 
 source_urls = [
-    "http://45.192.97.170:6001/txt"
+    "http://45.192.97.170:6001/txt",
+    "https://live.zbds.top/tv/iptv4.txt"
 ]
 
 url_blacklist = [
