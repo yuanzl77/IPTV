@@ -42,6 +42,7 @@ python main.py
 - `live.txt` — TXT 格式（TVBox / 风萤直接使用）
 - `function.log` — 运行日志，含黑名单建议
 
+本地播放建议搭配[iptv-checker](https://github.com/zhimin-dev/iptv-checker)
 ---
 
 ## 配置说明
