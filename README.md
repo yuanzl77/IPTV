@@ -2,6 +2,8 @@
 此项目通过其它直播源抓取集成一个总直播源，直播内容通过demo自定义进行运行爬取。每天自动更新直播，提供在线地址，可以直接使用各大播放平台。M3U配置peg和台标，支持IPV6/4双栈访问!
 > 声明: 所有播放源均收集于互联网，仅供测试研究学习，`不得商用!`
 
+搭配本地检测工具过滤使用更佳 如：[iptv-checker](https://github.com/zhimin-dev/iptv-checker)
+
 ## 直播源调用地址
 - 仓库文件加速 [线路1](https://github.776512.xyz/https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.m3u)
 - 仓库文件加速 [线路2](https://cdn.jsdelivr.net/gh/yuanzl77/IPTV@latest/live.m3u)
