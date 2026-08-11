@@ -1,11 +1,14 @@
 import re
+import asyncio
 import requests
 import logging
 from collections import OrderedDict
 from datetime import datetime
 import config
+import check as quality_checker
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("function.log", "w", encoding="utf-8"), logging.StreamHandler()])
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s", handlers=[logging.FileHandler("function.log", "w", encoding="utf-8"), logging.StreamHandler()])
+
 
 def parse_template(template_file):
     template_channels = OrderedDict()
@@ -24,13 +27,14 @@ def parse_template(template_file):
 
     return template_channels
 
+
 def fetch_channels(url):
     channels = OrderedDict()
 
     try:
         response = requests.get(url)
         response.raise_for_status()
-        response.encoding = 'utf-8'
+        response.encoding = "utf-8"
         lines = response.text.split("\n")
         current_category = None
         is_m3u = any("#EXTINF" in line for line in lines[:15])
@@ -64,14 +68,15 @@ def fetch_channels(url):
                         channel_url = match.group(2).strip()
                         channels[current_category].append((channel_name, channel_url))
                     elif line:
-                        channels[current_category].append((line, ''))
+                        channels[current_category].append((line, ""))
         if channels:
             categories = ", ".join(channels.keys())
-            logging.info(f"url: {url} 爬取成功✅，包含频道分类: {categories}")
+            logging.info(f"url: {url} 抓取成功，包含频道分类: {categories}")
     except requests.RequestException as e:
-        logging.error(f"url: {url} 爬取失败❌, Error: {e}")
+        logging.error(f"url: {url} 抓取失败。 Error: {e}")
 
     return channels
+
 
 def match_channels(template_channels, all_channels):
     matched_channels = OrderedDict()
@@ -85,6 +90,7 @@ def match_channels(template_channels, all_channels):
                         matched_channels[category].setdefault(channel_name, []).append(online_channel_url)
 
     return matched_channels
+
 
 def filter_source_urls(template_file):
     template_channels = parse_template(template_file)
@@ -103,25 +109,65 @@ def filter_source_urls(template_file):
 
     return matched_channels, template_channels
 
+
 def is_ipv6(url):
-    return re.match(r'^http:\/\/\[[0-9a-fA-F:]+\]', url) is not None
+    return re.match(r"^http:\/\/\[[0-9a-fA-F:]+\]", url) is not None
+
+
+def _print_domain_suggestions(fail_domains: dict):
+    """打印检测失败的域名建议列表，供用户考虑加入黑名单"""
+    if not fail_domains:
+        return
+    summary = {}
+    for domain, entries in sorted(fail_domains.items(), key=lambda x: -len(x[1])):
+        statuses = {}
+        for e in entries:
+            s = e["status"]
+            statuses[s] = statuses.get(s, 0) + 1
+        status_str = ", ".join(f"{k}={v}" for k, v in sorted(statuses.items()))
+        summary[domain] = f"失败次数={len(entries)}  ({status_str})"
+
+    logging.info("[黑名单建议] 以下域名检测频繁失败，可考虑加入 url_blacklist：")
+    for domain, info in summary.items():
+        logging.info(f"  {domain}  {info}")
+
+
+async def async_main():
+    """异步主入口：fetch -> check -> write"""
+    template_file = "demo.txt"
+    channels, template_channels = filter_source_urls(template_file)
+
+    if config.enable_quality_check:
+        logging.info("[质量检测] 开始...")
+        check_results, fail_domains = await quality_checker.check_all(channels)
+        channels = quality_checker.filter_dead_urls(channels, check_results)
+        _print_domain_suggestions(fail_domains)
+        logging.info("[质量检测] 完成")
+
+    updateChannelUrlsM3U(channels, template_channels)
+
 
 def updateChannelUrlsM3U(channels, template_channels):
     written_urls = set()
 
     current_date = datetime.now().strftime("%Y-%m-%d")
     for group in config.announcements:
-        for announcement in group['entries']:
-            if announcement['name'] is None:
-                announcement['name'] = current_date
+        for announcement in group["entries"]:
+            name = announcement.get("name")
+            if name is None or name == "__TIME__":
+                name = current_date
+            elif isinstance(name, str) and "__TIME__" in name:
+                name = name.replace("__TIME__", current_date)
+            announcement["name"] = name
 
     with open("live.m3u", "w", encoding="utf-8") as f_m3u:
-        f_m3u.write(f"""#EXTM3U x-tvg-url={",".join(f'"{epg_url}"' for epg_url in config.epg_urls)}\n""")
+        epg_attr = ",".join(chr(34)+epg_url+chr(34) for epg_url in config.epg_urls)
+        f_m3u.write(f"#EXTM3U x-tvg-url={epg_attr}\n")
 
         with open("live.txt", "w", encoding="utf-8") as f_txt:
             for group in config.announcements:
                 f_txt.write(f"{group['channel']},#genre#\n")
-                for announcement in group['entries']:
+                for announcement in group["entries"]:
                     f_m3u.write(f"""#EXTINF:-1 tvg-id="1" tvg-name="{announcement['name']}" tvg-logo="{announcement['logo']}" group-title="{group['channel']}",{announcement['name']}\n""")
                     f_m3u.write(f"{announcement['url']}\n")
                     f_txt.write(f"{announcement['name']},{announcement['url']}\n")
@@ -141,11 +187,11 @@ def updateChannelUrlsM3U(channels, template_channels):
                             total_urls = len(filtered_urls)
                             for index, url in enumerate(filtered_urls, start=1):
                                 if is_ipv6(url):
-                                    url_suffix = f"$LR•IPV6" if total_urls == 1 else f"$LR•IPV6『线路{index}』"
+                                    url_suffix = f"$LR—IPV6" if total_urls == 1 else f"$LR—IPV6【线路{index}】"
                                 else:
-                                    url_suffix = f"$LR•IPV4" if total_urls == 1 else f"$LR•IPV4『线路{index}』"
-                                if '$' in url:
-                                    base_url = url.split('$', 1)[0]
+                                    url_suffix = f"$LR—IPV4" if total_urls == 1 else f"$LR—IPV4【线路{index}】"
+                                if "$" in url:
+                                    base_url = url.split("$", 1)[0]
                                 else:
                                     base_url = url
 
@@ -157,7 +203,6 @@ def updateChannelUrlsM3U(channels, template_channels):
 
             f_txt.write("\n")
 
+
 if __name__ == "__main__":
-    template_file = "demo.txt"
-    channels, template_channels = filter_source_urls(template_file)
-    updateChannelUrlsM3U(channels, template_channels)
+    asyncio.run(async_main())

@@ -30,7 +30,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install requests
+        pip install requests aiohttp
 
     - name: Run Python script
       run: python main.py
