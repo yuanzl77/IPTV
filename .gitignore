@@ -1,0 +1,8 @@
+__pycache__/
+
+*.pyc
+
+*.log
+
+*.m3u
+*.txt
