@@ -9,6 +9,7 @@ source_urls = [
     "http://45.192.97.170:6001/txt",
     "https://tvlive.yuan77.workers.dev/xymm",
     "http://47.100.209.208:20002",
+    "https://raw.githubusercontent.com/Kimentanm/aptv/refs/heads/master/m3u/iptv.m3u",
     "https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/result.txt",
     "https://raw.githubusercontent.com/Guovin/iptv-api/refs/heads/gd/output/ipv6/result.txt",
     "https://live.zbds.top/tv/iptv6.txt",
