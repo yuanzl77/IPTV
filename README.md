@@ -29,7 +29,7 @@
 - **黑名单建议**：每次运行后打印频繁失败的域名，方便手动加入黑名单
 - **EPG 电子节目单**：M3U 头部内置多组 EPG 地址，支持 TiviMate、Kodi 等播放器
 - **公告支持**：可在直播源头部插入公告条目，支持自动日期占位符
-- **每日自动更新**：GitHub Actions 定时任务，每天 21:45 自动推送
+- **每日自动更新**：GitHub Actions 定时任务，每天 05:55 自动推送
 
 ---
 
@@ -46,6 +46,7 @@ python main.py
 - `function.log` — 运行日志，含黑名单建议
 
 本地播放建议搭配[iptv-checker](https://github.com/zhimin-dev/iptv-checker)
+实现个人环境高质量播放体验
 ---
 
 ## 配置说明
