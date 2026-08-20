@@ -72,12 +72,8 @@ announcements = [
 # 用途：让支持 EPG 的播放器（如 TiviMate、Kodi）显示节目指南
 # 多个地址用逗号分隔，播放器会依次尝试加载
 epg_urls = [
-    "https://live.fanmingming.com/e.xml",
-    "http://epg.51zmt.top:8000/e.xml",
-    "http://epg.aptvapp.com/xml",
-    "https://epg.pw/xmltv/epg_CN.xml",
-    "https://epg.pw/xmltv/epg_HK.xml",
-    "https://epg.pw/xmltv/epg_TW.xml"
+    "http://e.erw.cc/e.xml.gz",
+    "https://raw.githubusercontent.com/kuke31/xmlgz/main/e.xml.gz"
 ]
 
 # ── 质量检测配置 ───────────────────────────────────────────────────────

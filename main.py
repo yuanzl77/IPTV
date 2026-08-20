@@ -28,6 +28,35 @@ def parse_template(template_file):
     return template_channels
 
 
+def fetch_epg_id_map():
+    """从 config.epg_urls[0] 下载 EPG，解析出 {频道名: id} 映射字典。"""
+    import gzip
+    import xml.etree.ElementTree as ET
+    epg_url = config.epg_urls[0]
+    try:
+        resp = requests.get(epg_url, timeout=15)
+        resp.raise_for_status()
+        # .gz 链接需要解压，.xml 链接直接用
+        if epg_url.endswith(".gz"):
+            xml_data = gzip.decompress(resp.content)
+        else:
+            xml_data = resp.content
+        tree = ET.fromstring(xml_data)
+        epg_id_map = {}
+        for ch in tree.findall("channel"):
+            dn = ch.find("display-name")
+            if dn is not None and dn.text:
+                eid = ch.get("id", "").strip()
+                name = dn.text.strip()
+                if eid and name:
+                    epg_id_map[name] = eid
+        logging.info(f"[EPG映射] 成功加载 {len(epg_id_map)} 个频道 ID")
+        return epg_id_map
+    except Exception as e:
+        logging.warning(f"[EPG映射] 加载失败，将使用默认数字 ID: {e}")
+        return {}
+
+
 def fetch_channels(url):
     channels = OrderedDict()
 
@@ -78,15 +107,26 @@ def fetch_channels(url):
     return channels
 
 
+def _normalize(name: str) -> str:
+    s = name.strip()
+    s = re.sub(r'[（\[(（\[).+?[）\]\)]', '', s)
+    s = re.sub(r'(高清版|超清版|频道|卫视|高清|超清|HD|台)$', '', s)
+    while re.search(r'(高清版|超清版|频道|卫视|高清|超清|HD|台)$', s):
+        s = re.sub(r'(高清版|超清版|频道|卫视|高清|超清|HD|台)$', '', s)
+    s = s.replace('-', '').replace(' ', '')
+    return s
+
+
 def match_channels(template_channels, all_channels):
     matched_channels = OrderedDict()
 
     for category, channel_list in template_channels.items():
         matched_channels[category] = OrderedDict()
         for channel_name in channel_list:
+            norm_target = _normalize(channel_name)
             for online_category, online_channel_list in all_channels.items():
                 for online_channel_name, online_channel_url in online_channel_list:
-                    if channel_name == online_channel_name:
+                    if _normalize(online_channel_name) == norm_target:
                         matched_channels[category].setdefault(channel_name, []).append(online_channel_url)
 
     return matched_channels
@@ -111,7 +151,9 @@ def filter_source_urls(template_file):
 
 
 def is_ipv6(url):
-    return re.match(r"^http:\/\/\[[0-9a-fA-F:]+\]", url) is not None
+    # ipv6 
+    clean_url = url.rstrip("$")
+    return re.match(r"^https?://\[[0-9a-fA-F:]+\]", clean_url) is not None
 
 
 def _print_domain_suggestions(fail_domains: dict):
@@ -134,6 +176,7 @@ def _print_domain_suggestions(fail_domains: dict):
 
 async def async_main():
     """异步主入口：fetch -> check -> write"""
+    epg_id_map = fetch_epg_id_map()
     template_file = "demo.txt"
     channels, template_channels = filter_source_urls(template_file)
 
@@ -144,11 +187,12 @@ async def async_main():
         _print_domain_suggestions(fail_domains)
         logging.info("[质量检测] 完成")
 
-    updateChannelUrlsM3U(channels, template_channels)
+    updateChannelUrlsM3U(channels, template_channels, epg_id_map)
 
 
-def updateChannelUrlsM3U(channels, template_channels):
+def updateChannelUrlsM3U(channels, template_channels, epg_id_map=None):
     written_urls = set()
+    epg_id_map = epg_id_map or {}
 
     current_date = datetime.now().strftime("%Y-%m-%d")
     for group in config.announcements:
@@ -197,7 +241,8 @@ def updateChannelUrlsM3U(channels, template_channels):
 
                                 new_url = f"{base_url}{url_suffix}"
 
-                                f_m3u.write(f"#EXTINF:-1 tvg-id=\"{index}\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
+                                tvg_id = epg_id_map.get(channel_name, str(index))
+                                f_m3u.write(f"#EXTINF:-1 tvg-id=\"{tvg_id}\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
                                 f_m3u.write(new_url + "\n")
                                 f_txt.write(f"{channel_name},{new_url}\n")
 
