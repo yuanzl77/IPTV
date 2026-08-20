@@ -19,7 +19,7 @@ def _strip_suffix(url: str) -> str:
 
 
 def _get_domain(url: str) -> str:
-    """? URL ?? base domain???????????????"""
+    """从 URL 中提取基础域名（不含路径和端口）"""
     if not url:
         return ''
     stripped = url.split("$", 1)[0] if "$" in url else url
