@@ -48,12 +48,13 @@ announcements = [
 ]
 
 # ── EPG 电子节目单 ───────────────────────────────────────────────────────
-# 写入 live.m3u 头部的 x-tvg-url 属性
+# 同时用于：x-tvg-url 属性 + EPG 频道 ID 映射（{频道名: tvg-id}）
 # 用途：让支持 EPG 的播放器（如 TiviMate、Kodi）显示节目指南
-# 多个地址用逗号分隔，播放器会依次尝试加载
+# 建议将最全面的源放在最后，作为保底
 epg_urls = [
     "http://e.erw.cc/e.xml.gz",
-    "https://raw.githubusercontent.com/kuke31/xmlgz/main/e.xml.gz"
+    "https://github.776512.xyz/https://raw.githubusercontent.com/kuke31/xmlgz/main/e.xml.gz",
+    "https://github.776512.xyz/https://raw.githubusercontent.com/atsushi444/iptv-epg/refs/heads/main/EPG.xml",
 ]
 
 # ── 质量检测配置 ───────────────────────────────────────────────────────

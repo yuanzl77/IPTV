@@ -29,32 +29,37 @@ def parse_template(template_file):
 
 
 def fetch_epg_id_map():
-    """从 config.epg_urls[0] 下载 EPG，解析出 {频道名: id} 映射字典。"""
+    """从 config.epg_urls 依次加载 EPG，按频道名合并映射。保底源放末尾。"""
     import gzip
     import xml.etree.ElementTree as ET
-    epg_url = config.epg_urls[0]
-    try:
-        resp = requests.get(epg_url, timeout=15)
-        resp.raise_for_status()
-        # .gz 链接需要解压，.xml 链接直接用
-        if epg_url.endswith(".gz"):
-            xml_data = gzip.decompress(resp.content)
-        else:
-            xml_data = resp.content
-        tree = ET.fromstring(xml_data)
-        epg_id_map = {}
-        for ch in tree.findall("channel"):
-            dn = ch.find("display-name")
-            if dn is not None and dn.text:
-                eid = ch.get("id", "").strip()
-                name = dn.text.strip()
-                if eid and name:
-                    epg_id_map[name] = eid
-        logging.info(f"[EPG映射] 成功加载 {len(epg_id_map)} 个频道 ID")
-        return epg_id_map
-    except Exception as e:
-        logging.warning(f"[EPG映射] 加载失败，将使用默认数字 ID: {e}")
-        return {}
+    epg_id_map = {}
+    for epg_url in config.epg_urls:
+        try:
+            resp = requests.get(epg_url, timeout=15)
+            resp.raise_for_status()
+            # .gz 链接需要解压，.xml 链接直接用
+            if epg_url.endswith(".gz"):
+                xml_data = gzip.decompress(resp.content)
+            else:
+                xml_data = resp.content
+            tree = ET.fromstring(xml_data)
+            for ch in tree.findall("channel"):
+                dn = ch.find("display-name")
+                if dn is not None and dn.text:
+                    eid = ch.get("id", "").strip()
+                    name = dn.text.strip()
+                    if eid and name:
+                        epg_id_map.setdefault(name, eid)
+            logging.info(f"[EPG映射] 从 {epg_url} 加载成功")
+        except Exception as e:
+            logging.warning(f"[EPG映射] 从 {epg_url} 加载失败，尝试下一个源: {e}")
+    if epg_id_map:
+        logging.info(f"[EPG映射] 共合并加载 {len(epg_id_map)} 个频道 ID")
+    else:
+        logging.warning("[EPG映射] 所有 EPG 源均加载失败，将使用默认数字 ID")
+    return epg_id_map
+
+
 
 
 def fetch_channels(url):
@@ -241,7 +246,7 @@ def updateChannelUrlsM3U(channels, template_channels, epg_id_map=None):
 
                                 new_url = f"{base_url}{url_suffix}"
 
-                                tvg_id = epg_id_map.get(channel_name, str(index))
+                                tvg_id = epg_id_map.get(channel_name, channel_name)
                                 f_m3u.write(f"#EXTINF:-1 tvg-id=\"{tvg_id}\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
                                 f_m3u.write(new_url + "\n")
                                 f_txt.write(f"{channel_name},{new_url}\n")
