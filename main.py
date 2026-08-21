@@ -161,6 +161,53 @@ def is_ipv6(url):
     return re.match(r"^https?://\[[0-9a-fA-F:]+\]", clean_url) is not None
 
 
+
+
+
+def _url_sort_key(url: str, check_results: dict):
+    """
+    排序 key：FFprobe 通过 > 仅 HTTP 通过；高分辨率高码率优先
+    返回 (layer_rank, -bitrate, -width)，sorted 升序排列
+    """
+    clean = url.split(chr(36), 1)[0] if chr(36) in url else url
+    layer = "fast"
+    bitrate = 0
+    width = 0
+    if check_results:
+        for cat_ch in check_results.values():
+            for ch_urls in cat_ch.values():
+                r = ch_urls.get(clean, {})
+                if r:
+                    layer = r.get("layer", "fast")
+                    fp = r.get("ffprobe", {})
+                    if fp:
+                        bitrate = fp.get("bitrate", 0)
+                        width = fp.get("width", 0)
+                    break
+    layer_rank = 0 if layer == "ffprobe" else 1
+    return (layer_rank, -bitrate, -width)
+
+def _get_meta_suffix(url: str, check_results: dict) -> str:
+    """从 check_results 提取 ffprobe 元数据，生成后缀如 【1920x1080@256kbps】"""
+    clean = url.split(chr(36), 1)[0] if chr(36) in url else url
+    if not check_results:
+        return ""
+    for cat_ch in check_results.values():
+        for ch_urls in cat_ch.values():
+            r = ch_urls.get(clean, {})
+            fp = r.get("ffprobe", {})
+            if fp and fp.get("status") == "ok":
+                w, h = fp.get("width", 0), fp.get("height", 0)
+                br = fp.get("bitrate", 0)
+                parts = []
+                if w and h:
+                    parts.append(f"{w}x{h}")
+                if br > 0:
+                    parts.append(f"{br//1000}kbps")
+                if parts:
+                    return " 【" + "@".join(parts) + "】"
+    return ""
+
 def _print_domain_suggestions(fail_domains: dict):
     """打印检测失败的域名建议列表，供用户考虑加入黑名单"""
     if not fail_domains:
@@ -192,10 +239,10 @@ async def async_main():
         _print_domain_suggestions(fail_domains)
         logging.info("[质量检测] 完成")
 
-    updateChannelUrlsM3U(channels, template_channels, epg_id_map)
+    updateChannelUrlsM3U(channels, template_channels, epg_id_map, check_results)
 
 
-def updateChannelUrlsM3U(channels, template_channels, epg_id_map=None):
+def updateChannelUrlsM3U(channels, template_channels, epg_id_map=None, check_results=None):
     written_urls = set()
     epg_id_map = epg_id_map or {}
 
@@ -226,7 +273,10 @@ def updateChannelUrlsM3U(channels, template_channels, epg_id_map=None):
                 if category in channels:
                     for channel_name in channel_list:
                         if channel_name in channels[category]:
-                            sorted_urls = sorted(channels[category][channel_name], key=lambda url: not is_ipv6(url) if config.ip_version_priority == "ipv6" else is_ipv6(url))
+                            sorted_urls = sorted(
+                                channels[category][channel_name],
+                                key=lambda url: _url_sort_key(url, check_results)
+                            )
                             filtered_urls = []
                             for url in sorted_urls:
                                 if url and url not in written_urls and not any(blacklist in url for blacklist in config.url_blacklist):
@@ -236,9 +286,11 @@ def updateChannelUrlsM3U(channels, template_channels, epg_id_map=None):
                             total_urls = len(filtered_urls)
                             for index, url in enumerate(filtered_urls, start=1):
                                 if is_ipv6(url):
-                                    url_suffix = f"$LR—IPV6" if total_urls == 1 else f"$LR—IPV6【线路{index}】"
+                                    extra = _get_meta_suffix(url, check_results)
+                                    url_suffix = f"$LR—IPV6{extra}" if total_urls == 1 else f"$LR—IPV6【线路{index}】{extra}"
                                 else:
-                                    url_suffix = f"$LR—IPV4" if total_urls == 1 else f"$LR—IPV4【线路{index}】"
+                                    extra = _get_meta_suffix(url, check_results)
+                                    url_suffix = f"$LR—IPV4{extra}" if total_urls == 1 else f"$LR—IPV4【线路{index}】{extra}"
                                 if "$" in url:
                                     base_url = url.split("$", 1)[0]
                                 else:
@@ -255,4 +307,7 @@ def updateChannelUrlsM3U(channels, template_channels, epg_id_map=None):
 
 
 if __name__ == "__main__":
-    asyncio.run(async_main())
+    try:
+        asyncio.run(async_main())
+    finally:
+        quality_checker._shutdown_ffprobe_executor()

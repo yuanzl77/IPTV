@@ -25,11 +25,15 @@
 
 - **自动聚合**：从多个数据源抓取频道，按频道名精确匹配和模糊匹配汇总
 - **IPv4 / IPv6 双栈**：优先使用 IPv6/IPv4 地址（可配置）
-- **质量检测**：aiohttp 并发测活，自动过滤失效源（可选关闭）
+- **双引擎质量检测**：HTTP 快筛 + FFprobe 中度探测，双重过滤失效和低质量源
+  - 第一层：aiohttp 并发拉取 playlist，验证可达性
+  - 第二层：ffprobe 探流，提取分辨率、码率、编解码器信息
+- **智能排序**：FFprobe 通过的源排前面，同层内按码率、分辨率降序排列
+- **信息标注**：输出 URL 末尾自动附加分辨率和码率，如 `【1920x1080@256kbps】`
 - **黑名单建议**：每次运行后打印频繁失败的域名，方便手动加入黑名单
 - **EPG 电子节目单**：M3U 头部内置多组 EPG 地址，支持 TiviMate、Kodi 等播放器
 - **公告支持**：可在直播源头部插入公告条目，支持自动日期占位符
-- **每日自动更新**：GitHub Actions 定时任务，每天 05:55 自动推送
+- **每日自动更新**：GitHub Actions 定时任务，每天北京时间 06:00 自动推送
 
 ---
 
@@ -37,6 +41,8 @@
 
 ```bash
 pip install requests aiohttp
+# Windows 默认使用已安装的 ffmpeg，Linux 需先安装：
+# sudo apt-get install -y ffmpeg
 python main.py
 ```
 
@@ -69,10 +75,10 @@ announcements = [ ... ]
 # EPG 地址列表
 epg_urls = [ ... ]
 
-# 质量检测开关
-enable_quality_check = True    # True=检测，False=跳过
-check_timeout = 5.0            # 单个 URL 超时（秒）
-check_max_conn = 50            # 最大并发数
+# 质量检测
+enable_quality_check = True    # True=启用质量检测（测活后过滤失效源），False=直接输出不过滤
+check_timeout    = 3.5         # 单个 URL HTTP 请求超时时间（秒），超时视为失效
+check_max_conn   = 50          # 最大并发检测数，调高可加速但更占带宽
 ```
 
 

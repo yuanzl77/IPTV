@@ -2,7 +2,7 @@ name: Daily Update
 
 on:
   schedule:
-    - cron: '45 21 * * *'
+    - cron: '0 6 * * *'
   workflow_dispatch:
     branches:
       - main
@@ -30,6 +30,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        sudo apt-get install -y ffmpeg
         pip install requests aiohttp
 
     - name: Run Python script
