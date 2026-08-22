@@ -44,7 +44,7 @@ Actions 运行成功后，生成的 live.m3u 和 live.txt 会出现在仓库的�
 ### 方式二：Clone 项目（本地运行）
 ```bash
 # 1. 克隆项目到本地
-git clone https://github.com/你的用户名/IPTV.git
+git clone https://github.com/yuanzl77/IPTV.git
 cd IPTV
 
 # 2. 安装依赖
