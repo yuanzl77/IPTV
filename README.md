@@ -9,16 +9,6 @@
 ![img](./image/Screenshot_2026-08-18-08-36-24-053_com.fongmi.android.tv.jpg)
 ![img](./image/Screenshot_2026-08-18-08-36-21-906_com.fongmi.android.tv.jpg)
 
-## 在线地址
-
-| 线路 | 地址 |
-|------|------|
-| 直连 | https://live.776512.xyz/yuanzl77 |
-| M3U | https://cdn.jsdelivr.net/gh/yuanzl77/IPTV@latest/live.m3u |
-| TXT | https://cdn.jsdelivr.net/gh/yuanzl77/IPTV@latest/live.txt |
-
-> CDN 加速：https://github.776512.xyz/https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.m3u
-
 ---
 
 ## 功能特性
@@ -36,15 +26,47 @@
 - **每日自动更新**：GitHub Actions 定时任务，每天北京时间 06:00 自动推送
 
 ---
+## Fork 或 Clone 本仓库运行
 
-## 本地运行
+### 方式一：Fork 项目（使用 GitHub Actions 自动运行）
+- Fork 本仓库​
+- 点击页面右上角的 Fork 按钮，将项目复制到你的 GitHub 账号下。
 
+- 编辑你 fork 后的仓库中的 config.py 文件，找到 source_urls 变量，替换为你自己拥有的合法直播源地址（例如自建源、已获授权的公开源）。
+
+- 启用 GitHub Actions​
+- 进入你 fork 的仓库，点击 Actions 标签页，如果提示需要启用 Workflow，点击 I understand my workflows, go ahead and enable them。之后 Actions 会根据 .github/workflows 中的配置自动运行（通常为每日定时执行）。你也可以手动触发一次，验证能否正常生成 live.m3u。
+获取结果​
+Actions 运行成功后，生成的 live.m3u 和 live.txt 会出现在仓库的根目录（或指定输出目录），可直接通过 Raw 链接导入播放器。
+
+---
+
+### 方式二：Clone 项目（本地运行）
 ```bash
-pip install requests aiohttp
-# Windows 默认使用已安装的 ffmpeg，Linux 需先安装：
-# sudo apt-get install -y ffmpeg
+# 1. 克隆项目到本地
+git clone https://github.com/你的用户名/IPTV.git
+cd IPTV
+
+# 2. 安装依赖
+pip install -r requirements.txt
+
+# 3. 配置数据源（必须操作）
+# 编辑 config.py，找到 source_urls 变量，替换为你自己拥有的合法直播源地址
+# （例如自建源、已获授权的公开源）
+
+# 4. 运行脚本
 python main.py
+
+# 生成的 live.m3u 和 live.txt 位于项目根目录，可直接导入播放器使用。
+
+# 5. （可选）设置定时任务
+# 如需每日自动更新，可使用 cron（Linux/macOS）或任务计划程序（Windows）定期执行 python main.py
+
 ```
+
+> ⚠️ **重要提示**：您 fork 后的仓库是您个人的独立副本，作者无法控制其内容。请确保您使用的所有直播源均已获得合法授权，任何因使用本脚本导致的版权或合规问题，均由使用者自行承担。
+
+---
 
 输出文件：
 - `live.m3u` — M3U 格式（含 EPG，带台标）
